@@ -15,9 +15,6 @@ class VPBorderView: UIView {
     private let borderShapeLayer:CAShapeLayer = CAShapeLayer.init()
     // 渐变色边框
     private let gradientLayer:CAGradientLayer = CAGradientLayer.init()
-    // 半透明背景图层
-    private let backgroundLayer:CAShapeLayer = CAShapeLayer.init()
-    
     /// 边框颜色 默认无色
     var borderColors:Array<CGColor> = [UIColor.clear.cgColor] {
         didSet {
@@ -25,10 +22,15 @@ class VPBorderView: UIView {
         }
     }
     
-    /// 不规则背形状景颜色
-    var backgroundLayerColor:CGColor = UIColor(red: 0.04, green: 0.04, blue: 0.1, alpha: 0.7).cgColor {
+    var borderStartPoint:CGPoint = CGPointZero {
         didSet {
-            backgroundLayer.fillColor = backgroundLayerColor
+            gradientLayer.startPoint = borderStartPoint
+        }
+    }
+    
+    var borderEndPoint:CGPoint = CGPoint(x: 1, y: 1) {
+        didSet {
+            gradientLayer.endPoint = borderEndPoint
         }
     }
     
@@ -38,6 +40,32 @@ class VPBorderView: UIView {
             borderShapeLayer.lineWidth = borderWidth
         }
     }
+    
+    // 背景图层
+    var backgroundStartPoint:CGPoint = CGPointZero {
+        didSet {
+            backgroundGradientLayer.startPoint = backgroundStartPoint
+        }
+    }
+    
+    var backgroundEndPoint:CGPoint = CGPoint(x: 1, y: 1) {
+        didSet {
+            backgroundGradientLayer.endPoint = backgroundEndPoint
+        }
+    }
+    private let backgroundLayer:CAShapeLayer = CAShapeLayer.init()
+    private let backgroundGradientLayer:CAGradientLayer = CAGradientLayer.init()
+    /// 不规则背景形状景颜色 渐变色需要至少2个颜色 所以当设置了一个颜色时认为为纯色背景
+    var backgroundColors:Array<CGColor> = [UIColor.clear.cgColor] {
+        didSet {
+            if backgroundColors.count == 1 {
+                let color:CGColor = backgroundColors.first!
+                backgroundColors.append(color)
+                backgroundGradientLayer.colors = backgroundColors
+            }
+        }
+    }
+    
     /// 上方左右边距
     var topSpacess:(left:Double,right:Double) = (0,0)
     /// 左侧上下边距
@@ -78,18 +106,25 @@ class VPBorderView: UIView {
         borderShapeLayer.path = borderBezierPath.cgPath
         
         gradientLayer.frame = bounds
-        gradientLayer.startPoint = CGPointZero
-        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        gradientLayer.startPoint = borderStartPoint
+        gradientLayer.endPoint = borderEndPoint
         gradientLayer.colors = borderColors
         gradientLayer.mask = borderShapeLayer
         layer.addSublayer(gradientLayer)
         
         // 绘制不规则形状背景
         backgroundLayer.strokeColor = UIColor.clear.cgColor
-        backgroundLayer.fillColor = backgroundLayerColor
+        backgroundLayer.fillColor = UIColor.white.cgColor
         let concatTransform = CGAffineTransformConcat(CGAffineTransformMakeTranslation(borderWidth/2, borderWidth/2), CGAffineTransformMakeScale((viewWidth - borderWidth)/viewWidth, (viewHeight - borderWidth)/viewHeight))
         borderBezierPath.apply(concatTransform)
         backgroundLayer.path = borderBezierPath.cgPath
         layer.addSublayer(backgroundLayer)
+        
+        backgroundGradientLayer.frame = bounds
+        backgroundGradientLayer.startPoint = backgroundStartPoint
+        backgroundGradientLayer.endPoint = backgroundEndPoint
+        backgroundGradientLayer.colors = backgroundColors
+        backgroundGradientLayer.mask = backgroundLayer
+        layer.addSublayer(backgroundGradientLayer)
     }
 }

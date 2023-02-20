@@ -11,8 +11,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
 
     @IBOutlet private weak var listTableView: UITableView!
     
-    private let listArray:Array = [["title":"词卡错误划线","class":"VPBorderLabelController"], ["title":"倍速+字幕UI（背景模糊）","class":"VPItemsSelectController"],["title":"选择对白","class":"VPDialogueController"]]
-    
+    private let listArray:Array = [["title":"词卡错误划线","class":"VPBorderLabelController"], ["title":"倍速+字幕UI（背景模糊）","class":"VPItemsSelectController"],["title":"选择对白","class":"VPDialogueController"],["title":"声波动画","class":"VPLineWaveController"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()

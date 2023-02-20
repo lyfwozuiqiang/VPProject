@@ -4,4 +4,5 @@ use_frameworks!
 
 target 'VPProject' do
     pod 'SnapKit'
+    pod 'UIColor_Hex_Swift'
 end

@@ -7,6 +7,8 @@
 
 import UIKit
 
+import UIColor_Hex_Swift
+
 class VPItemsSelectView: UIView,UITableViewDataSource,UITableViewDelegate {
 
     var title:String = "" {
@@ -27,11 +29,14 @@ class VPItemsSelectView: UIView,UITableViewDataSource,UITableViewDelegate {
     private let borderView:VPBorderView = {
         let borderView = VPBorderView.init()
         borderView.borderWidth = 2
+        borderView.borderStartPoint = CGPointZero
+        borderView.borderEndPoint = CGPoint(x: 1, y: 1)
         borderView.leftSpaces.top = VPItemsSelectView.kSpaceLength
         borderView.topSpacess.left = VPItemsSelectView.kSpaceLength
         borderView.rightSpaces.bottom = VPItemsSelectView.kSpaceLength
         borderView.bottomSpaces.right = VPItemsSelectView.kSpaceLength
-        borderView.borderColors = [UIColor.init(red: 0.31, green: 0.43, blue: 0.96, alpha: 1).cgColor,UIColor.init(red: 0.4, green: 0.19, blue: 1.0, alpha: 1).cgColor]
+        borderView.borderColors = [UIColor.init(hex6: 0x4F6EF4).cgColor,UIColor.init(hex6: 0x6631FF).cgColor]
+        borderView.backgroundColors = [UIColor.init(hex6: 0x0B0A1A,alpha: 0.7).cgColor]
         borderView.translatesAutoresizingMaskIntoConstraints = false
         return borderView
     }()
@@ -171,7 +176,7 @@ class VPItemsSelectView: UIView,UITableViewDataSource,UITableViewDelegate {
     
     private func addLineGradientView() {
         let gradientView = VPGradientView.init()
-        let customBlueColor = UIColor(red: 0.31, green: 0.43, blue: 0.96, alpha: 1)
+        let customBlueColor = UIColor.init(hex6: 0x4F6EF4)
         gradientView.backgroundColors = [customBlueColor.withAlphaComponent(0.03).cgColor,customBlueColor.withAlphaComponent(1).cgColor,customBlueColor.withAlphaComponent(0.03).cgColor,]
         gradientView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(gradientView)
