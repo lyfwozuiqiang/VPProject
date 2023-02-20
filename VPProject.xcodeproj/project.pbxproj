@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		011570AE29A07C1F00B94616 /* VPGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570AD29A07C1F00B94616 /* VPGradientView.swift */; };
 		011570B029A0C4D000B94616 /* VPItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570AF29A0C4D000B94616 /* VPItemCell.swift */; };
+		011570B329A2139300B94616 /* VPDialogueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570B229A2139300B94616 /* VPDialogueController.swift */; };
+		011570B529A214CE00B94616 /* VPDialogueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570B429A214CE00B94616 /* VPDialogueView.swift */; };
+		011570B729A2254600B94616 /* VPDialogueLeftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570B629A2254600B94616 /* VPDialogueLeftCell.swift */; };
+		011570B929A2255600B94616 /* VPDialogueRightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570B829A2255600B94616 /* VPDialogueRightCell.swift */; };
+		011570BD29A2295F00B94616 /* VPBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570BB29A2295F00B94616 /* VPBorderView.swift */; };
+		011570BE29A2295F00B94616 /* VPGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570BC29A2295F00B94616 /* VPGradientView.swift */; };
 		0164B146299F5E500016A4A2 /* VPItemsSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0164B145299F5E500016A4A2 /* VPItemsSelectView.swift */; };
 		0164B149299F6A550016A4A2 /* VPItemsSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0164B147299F6A550016A4A2 /* VPItemsSelectController.swift */; };
-		0164B14C299F8ACC0016A4A2 /* VPBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0164B14B299F8ACC0016A4A2 /* VPBorderView.swift */; };
 		01C76F0D299E2CE9000F3B86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C76F0C299E2CE9000F3B86 /* AppDelegate.swift */; };
 		01C76F0F299E2CE9000F3B86 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C76F0E299E2CE9000F3B86 /* SceneDelegate.swift */; };
 		01C76F11299E2CE9000F3B86 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C76F10299E2CE9000F3B86 /* ViewController.swift */; };
@@ -25,11 +29,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		011570AD29A07C1F00B94616 /* VPGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPGradientView.swift; sourceTree = "<group>"; };
 		011570AF29A0C4D000B94616 /* VPItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPItemCell.swift; sourceTree = "<group>"; };
+		011570B229A2139300B94616 /* VPDialogueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VPDialogueController.swift; path = ../../../VPProject1/VPProject/VPItemsSelectView/VPDialogueController.swift; sourceTree = "<group>"; };
+		011570B429A214CE00B94616 /* VPDialogueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPDialogueView.swift; sourceTree = "<group>"; };
+		011570B629A2254600B94616 /* VPDialogueLeftCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPDialogueLeftCell.swift; sourceTree = "<group>"; };
+		011570B829A2255600B94616 /* VPDialogueRightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPDialogueRightCell.swift; sourceTree = "<group>"; };
+		011570BB29A2295F00B94616 /* VPBorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPBorderView.swift; sourceTree = "<group>"; };
+		011570BC29A2295F00B94616 /* VPGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPGradientView.swift; sourceTree = "<group>"; };
 		0164B145299F5E500016A4A2 /* VPItemsSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPItemsSelectView.swift; sourceTree = "<group>"; };
 		0164B147299F6A550016A4A2 /* VPItemsSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPItemsSelectController.swift; sourceTree = "<group>"; };
-		0164B14B299F8ACC0016A4A2 /* VPBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPBorderView.swift; sourceTree = "<group>"; };
 		01C76F09299E2CE9000F3B86 /* VPProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VPProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C76F0C299E2CE9000F3B86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01C76F0E299E2CE9000F3B86 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,13 +63,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		011570B129A2137800B94616 /* VPDialogue */ = {
+			isa = PBXGroup;
+			children = (
+				011570B229A2139300B94616 /* VPDialogueController.swift */,
+				011570B429A214CE00B94616 /* VPDialogueView.swift */,
+				011570B629A2254600B94616 /* VPDialogueLeftCell.swift */,
+				011570B829A2255600B94616 /* VPDialogueRightCell.swift */,
+			);
+			path = VPDialogue;
+			sourceTree = "<group>";
+		};
+		011570BA29A2295F00B94616 /* CommonView */ = {
+			isa = PBXGroup;
+			children = (
+				011570BB29A2295F00B94616 /* VPBorderView.swift */,
+				011570BC29A2295F00B94616 /* VPGradientView.swift */,
+			);
+			path = CommonView;
+			sourceTree = "<group>";
+		};
 		0164B144299F5E500016A4A2 /* VPItemsSelectView */ = {
 			isa = PBXGroup;
 			children = (
 				0164B145299F5E500016A4A2 /* VPItemsSelectView.swift */,
 				011570AF29A0C4D000B94616 /* VPItemCell.swift */,
-				0164B14B299F8ACC0016A4A2 /* VPBorderView.swift */,
-				011570AD29A07C1F00B94616 /* VPGradientView.swift */,
 				0164B147299F6A550016A4A2 /* VPItemsSelectController.swift */,
 			);
 			path = VPItemsSelectView;
@@ -91,8 +117,10 @@
 				01C76F10299E2CE9000F3B86 /* ViewController.swift */,
 				01C76F22299F2397000F3B86 /* ListTableViewCell.swift */,
 				01C76F23299F2397000F3B86 /* ListTableViewCell.xib */,
+				011570B129A2137800B94616 /* VPDialogue */,
 				01C76F26299F2677000F3B86 /* BorderLabel */,
 				0164B144299F5E500016A4A2 /* VPItemsSelectView */,
+				011570BA29A2295F00B94616 /* CommonView */,
 				01C76F12299E2CE9000F3B86 /* Main.storyboard */,
 				01C76F15299E2CE9000F3B86 /* Assets.xcassets */,
 				01C76F17299E2CE9000F3B86 /* LaunchScreen.storyboard */,
@@ -184,15 +212,19 @@
 			files = (
 				01C76F11299E2CE9000F3B86 /* ViewController.swift in Sources */,
 				01C76F2A299F27C8000F3B86 /* VPBorderLabelController.swift in Sources */,
-				011570AE29A07C1F00B94616 /* VPGradientView.swift in Sources */,
+				011570B929A2255600B94616 /* VPDialogueRightCell.swift in Sources */,
 				01C76F0D299E2CE9000F3B86 /* AppDelegate.swift in Sources */,
 				01C76F0F299E2CE9000F3B86 /* SceneDelegate.swift in Sources */,
+				011570B329A2139300B94616 /* VPDialogueController.swift in Sources */,
 				0164B149299F6A550016A4A2 /* VPItemsSelectController.swift in Sources */,
 				011570B029A0C4D000B94616 /* VPItemCell.swift in Sources */,
 				01C76F28299F268A000F3B86 /* VPBorderLabel.swift in Sources */,
-				0164B14C299F8ACC0016A4A2 /* VPBorderView.swift in Sources */,
 				0164B146299F5E500016A4A2 /* VPItemsSelectView.swift in Sources */,
 				01C76F24299F2397000F3B86 /* ListTableViewCell.swift in Sources */,
+				011570B729A2254600B94616 /* VPDialogueLeftCell.swift in Sources */,
+				011570BE29A2295F00B94616 /* VPGradientView.swift in Sources */,
+				011570BD29A2295F00B94616 /* VPBorderView.swift in Sources */,
+				011570B529A214CE00B94616 /* VPDialogueView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

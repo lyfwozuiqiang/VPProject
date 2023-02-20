@@ -124,7 +124,7 @@ class VPItemsSelectView: UIView,UITableViewDataSource,UITableViewDelegate {
     }
     
     //MARK: —— Action
-    @objc func confirmButtonClick() {
+    @objc private func confirmButtonClick() {
         var resultIndex = -1
         for (index,value) in itemSelectStatusArray.enumerated() {
             if value == true {

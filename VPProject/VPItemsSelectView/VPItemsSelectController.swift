@@ -8,6 +8,8 @@
 import UIKit
 
 class VPItemsSelectController: UIViewController {
+    
+    var clickIndex:Int = 0;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +36,16 @@ class VPItemsSelectController: UIViewController {
         guard let naviView = navigationController?.view else {
             return
         }
-        let random = arc4random_uniform(10)
+        
         var itemsView:VPItemsSelectView
-        if random % 2 == 0 {
+        if clickIndex % 2 == 0 {
             itemsView = VPItemsSelectView.init(title: "Text", itemsArray: ["English","English - Tiếng Việt","không ai"],selectedIndex: 1)
         } else {
             itemsView = VPItemsSelectView.init(title: "Rate", itemsArray: ["1.5x","1.25x","1.0x","0.75x","0.5x"])
+        }
+        clickIndex += 1
+        itemsView.confirmHandle = {(index,value) in
+            print("点击了\(index) value = \(value)")
         }
         itemsView.translatesAutoresizingMaskIntoConstraints = false
         naviView.addSubview(itemsView)

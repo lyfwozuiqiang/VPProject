@@ -26,7 +26,7 @@ class VPBorderLabelController: UIViewController {
         borderLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
         borderLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
         let attributeStr = NSMutableAttributedString.init(string:"hello wossrld hello world")
-        attributeStr.addAttributes([.underlineStyle: NSUnderlineStyle.thick.rawValue,.strikethroughColor:UIColor.blue], range: NSRange(location: 5, length: 15))
+        attributeStr.addAttributes([.strikethroughStyle: NSUnderlineStyle.thick.rawValue,.strikethroughColor:UIColor.blue], range: NSRange(location: 5, length: 15))
         borderLabel.attributedText = attributeStr
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
