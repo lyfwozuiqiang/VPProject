@@ -27,7 +27,7 @@ class VPDialogueLeftCell: UITableViewCell {
         label.numberOfLines = 0
         label.textColor = .white
         label.backgroundColor = .clear
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.montserratMediumFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

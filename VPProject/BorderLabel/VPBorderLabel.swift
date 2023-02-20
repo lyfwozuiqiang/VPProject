@@ -47,6 +47,7 @@ class VPBorderLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         lineBreakMode = .byCharWrapping
+        font = UIFont.montserratMediumFont(ofSize: 18)
     }
 
     override func layoutSubviews() {

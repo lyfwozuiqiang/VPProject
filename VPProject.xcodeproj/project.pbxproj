@@ -14,6 +14,7 @@
 		011570BD29A2295F00B94616 /* VPBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570BB29A2295F00B94616 /* VPBorderView.swift */; };
 		011570BE29A2295F00B94616 /* VPGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570BC29A2295F00B94616 /* VPGradientView.swift */; };
 		011570C229A3212A00B94616 /* VPDialogueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570C129A3212A00B94616 /* VPDialogueController.swift */; };
+		011570C429A3495400B94616 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570C329A3495400B94616 /* UIFont+Extension.swift */; };
 		0164B146299F5E500016A4A2 /* VPItemsSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0164B145299F5E500016A4A2 /* VPItemsSelectView.swift */; };
 		0164B149299F6A550016A4A2 /* VPItemsSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0164B147299F6A550016A4A2 /* VPItemsSelectController.swift */; };
 		01C76F0D299E2CE9000F3B86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C76F0C299E2CE9000F3B86 /* AppDelegate.swift */; };
@@ -26,6 +27,7 @@
 		01C76F25299F2397000F3B86 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C76F23299F2397000F3B86 /* ListTableViewCell.xib */; };
 		01C76F28299F268A000F3B86 /* VPBorderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C76F27299F268A000F3B86 /* VPBorderLabel.swift */; };
 		01C76F2A299F27C8000F3B86 /* VPBorderLabelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C76F29299F27C8000F3B86 /* VPBorderLabelController.swift */; };
+		D03266D9366C94AA8DBF4510 /* Pods_VPProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30585678472267F0001F9790 /* Pods_VPProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,7 @@
 		011570BB29A2295F00B94616 /* VPBorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPBorderView.swift; sourceTree = "<group>"; };
 		011570BC29A2295F00B94616 /* VPGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPGradientView.swift; sourceTree = "<group>"; };
 		011570C129A3212A00B94616 /* VPDialogueController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPDialogueController.swift; sourceTree = "<group>"; };
+		011570C329A3495400B94616 /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		0164B145299F5E500016A4A2 /* VPItemsSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPItemsSelectView.swift; sourceTree = "<group>"; };
 		0164B147299F6A550016A4A2 /* VPItemsSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPItemsSelectController.swift; sourceTree = "<group>"; };
 		01C76F09299E2CE9000F3B86 /* VPProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VPProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +53,9 @@
 		01C76F23299F2397000F3B86 /* ListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
 		01C76F27299F268A000F3B86 /* VPBorderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPBorderLabel.swift; sourceTree = "<group>"; };
 		01C76F29299F27C8000F3B86 /* VPBorderLabelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPBorderLabelController.swift; sourceTree = "<group>"; };
+		30585678472267F0001F9790 /* Pods_VPProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VPProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50688C4A03E850EE41023470 /* Pods-VPProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VPProject.debug.xcconfig"; path = "Target Support Files/Pods-VPProject/Pods-VPProject.debug.xcconfig"; sourceTree = "<group>"; };
+		EFBE52073CBB14B2BFB87F11 /* Pods-VPProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VPProject.release.xcconfig"; path = "Target Support Files/Pods-VPProject/Pods-VPProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03266D9366C94AA8DBF4510 /* Pods_VPProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +105,8 @@
 			children = (
 				01C76F0B299E2CE9000F3B86 /* VPProject */,
 				01C76F0A299E2CE9000F3B86 /* Products */,
+				19B0D1618D26A6FAF0D42682 /* Pods */,
+				746D307DB3208AE5B05DBE71 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,6 +126,7 @@
 				01C76F10299E2CE9000F3B86 /* ViewController.swift */,
 				01C76F22299F2397000F3B86 /* ListTableViewCell.swift */,
 				01C76F23299F2397000F3B86 /* ListTableViewCell.xib */,
+				011570C329A3495400B94616 /* UIFont+Extension.swift */,
 				011570B129A2137800B94616 /* VPDialogue */,
 				01C76F26299F2677000F3B86 /* BorderLabel */,
 				0164B144299F5E500016A4A2 /* VPItemsSelectView */,
@@ -138,6 +148,23 @@
 			path = BorderLabel;
 			sourceTree = "<group>";
 		};
+		19B0D1618D26A6FAF0D42682 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				50688C4A03E850EE41023470 /* Pods-VPProject.debug.xcconfig */,
+				EFBE52073CBB14B2BFB87F11 /* Pods-VPProject.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		746D307DB3208AE5B05DBE71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30585678472267F0001F9790 /* Pods_VPProject.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -145,9 +172,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01C76F1D299E2CE9000F3B86 /* Build configuration list for PBXNativeTarget "VPProject" */;
 			buildPhases = (
+				E5DCA0C4A44212B79894A22C /* [CP] Check Pods Manifest.lock */,
 				01C76F05299E2CE9000F3B86 /* Sources */,
 				01C76F06299E2CE9000F3B86 /* Frameworks */,
 				01C76F07299E2CE9000F3B86 /* Resources */,
+				72EC340D70DF4506ABAFE42D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -205,6 +234,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		72EC340D70DF4506ABAFE42D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VPProject/Pods-VPProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VPProject/Pods-VPProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VPProject/Pods-VPProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5DCA0C4A44212B79894A22C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VPProject-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		01C76F05299E2CE9000F3B86 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -224,6 +295,7 @@
 				011570B729A2254600B94616 /* VPDialogueLeftCell.swift in Sources */,
 				011570BE29A2295F00B94616 /* VPGradientView.swift in Sources */,
 				011570BD29A2295F00B94616 /* VPBorderView.swift in Sources */,
+				011570C429A3495400B94616 /* UIFont+Extension.swift in Sources */,
 				011570B529A214CE00B94616 /* VPDialogueView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +438,7 @@
 		};
 		01C76F1E299E2CE9000F3B86 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50688C4A03E850EE41023470 /* Pods-VPProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -395,6 +468,7 @@
 		};
 		01C76F1F299E2CE9000F3B86 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EFBE52073CBB14B2BFB87F11 /* Pods-VPProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

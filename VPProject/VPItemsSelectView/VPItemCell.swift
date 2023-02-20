@@ -31,7 +31,7 @@ class VPItemCell: UITableViewCell {
         let label = UILabel.init()
         label.textColor = .white
         label.backgroundColor = .clear
-        label.font = UIFont.init(name: "Montserrat", size: 18)
+        label.font = UIFont.montserratMediumFont(ofSize: 18)
         label.textAlignment = NSTextAlignment.center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
