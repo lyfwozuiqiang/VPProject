@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		011570B029A0C4D000B94616 /* VPItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570AF29A0C4D000B94616 /* VPItemCell.swift */; };
-		011570B329A2139300B94616 /* VPDialogueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570B229A2139300B94616 /* VPDialogueController.swift */; };
 		011570B529A214CE00B94616 /* VPDialogueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570B429A214CE00B94616 /* VPDialogueView.swift */; };
 		011570B729A2254600B94616 /* VPDialogueLeftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570B629A2254600B94616 /* VPDialogueLeftCell.swift */; };
 		011570B929A2255600B94616 /* VPDialogueRightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570B829A2255600B94616 /* VPDialogueRightCell.swift */; };
 		011570BD29A2295F00B94616 /* VPBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570BB29A2295F00B94616 /* VPBorderView.swift */; };
 		011570BE29A2295F00B94616 /* VPGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570BC29A2295F00B94616 /* VPGradientView.swift */; };
+		011570C029A31DB700B94616 /* VPDialogueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011570BF29A31DB700B94616 /* VPDialogueController.swift */; };
 		0164B146299F5E500016A4A2 /* VPItemsSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0164B145299F5E500016A4A2 /* VPItemsSelectView.swift */; };
 		0164B149299F6A550016A4A2 /* VPItemsSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0164B147299F6A550016A4A2 /* VPItemsSelectController.swift */; };
 		01C76F0D299E2CE9000F3B86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C76F0C299E2CE9000F3B86 /* AppDelegate.swift */; };
@@ -30,12 +30,12 @@
 
 /* Begin PBXFileReference section */
 		011570AF29A0C4D000B94616 /* VPItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPItemCell.swift; sourceTree = "<group>"; };
-		011570B229A2139300B94616 /* VPDialogueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VPDialogueController.swift; path = ../../../VPProject1/VPProject/VPItemsSelectView/VPDialogueController.swift; sourceTree = "<group>"; };
 		011570B429A214CE00B94616 /* VPDialogueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPDialogueView.swift; sourceTree = "<group>"; };
 		011570B629A2254600B94616 /* VPDialogueLeftCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPDialogueLeftCell.swift; sourceTree = "<group>"; };
 		011570B829A2255600B94616 /* VPDialogueRightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPDialogueRightCell.swift; sourceTree = "<group>"; };
 		011570BB29A2295F00B94616 /* VPBorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPBorderView.swift; sourceTree = "<group>"; };
 		011570BC29A2295F00B94616 /* VPGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPGradientView.swift; sourceTree = "<group>"; };
+		011570BF29A31DB700B94616 /* VPDialogueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VPDialogueController.swift; path = ../../../VPProject1/VPProject/VPDialogue/VPDialogueController.swift; sourceTree = "<group>"; };
 		0164B145299F5E500016A4A2 /* VPItemsSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPItemsSelectView.swift; sourceTree = "<group>"; };
 		0164B147299F6A550016A4A2 /* VPItemsSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPItemsSelectController.swift; sourceTree = "<group>"; };
 		01C76F09299E2CE9000F3B86 /* VPProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VPProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,10 +66,10 @@
 		011570B129A2137800B94616 /* VPDialogue */ = {
 			isa = PBXGroup;
 			children = (
-				011570B229A2139300B94616 /* VPDialogueController.swift */,
 				011570B429A214CE00B94616 /* VPDialogueView.swift */,
 				011570B629A2254600B94616 /* VPDialogueLeftCell.swift */,
 				011570B829A2255600B94616 /* VPDialogueRightCell.swift */,
+				011570BF29A31DB700B94616 /* VPDialogueController.swift */,
 			);
 			path = VPDialogue;
 			sourceTree = "<group>";
@@ -215,7 +215,7 @@
 				011570B929A2255600B94616 /* VPDialogueRightCell.swift in Sources */,
 				01C76F0D299E2CE9000F3B86 /* AppDelegate.swift in Sources */,
 				01C76F0F299E2CE9000F3B86 /* SceneDelegate.swift in Sources */,
-				011570B329A2139300B94616 /* VPDialogueController.swift in Sources */,
+				011570C029A31DB700B94616 /* VPDialogueController.swift in Sources */,
 				0164B149299F6A550016A4A2 /* VPItemsSelectController.swift in Sources */,
 				011570B029A0C4D000B94616 /* VPItemCell.swift in Sources */,
 				01C76F28299F268A000F3B86 /* VPBorderLabel.swift in Sources */,
