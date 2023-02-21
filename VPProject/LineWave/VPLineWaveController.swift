@@ -7,21 +7,38 @@
 
 import UIKit
 
+import SnapKit
+
 class VPLineWaveController: UIViewController {
 
+    private var lineWaveView:VPLineWaveView?
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
 
-        let lineWaveView = VPLineWaveView.init(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-        lineWaveView.backgroundColor = .cyan
-        view.addSubview(lineWaveView)
-        
+        lineWaveView = VPLineWaveView.init()
+        lineWaveView?.amplitude = 40
+        lineWaveView?.enableWaveAnimation(enable: true)
+        view.addSubview(lineWaveView!)
+        lineWaveView?.snp.makeConstraints({ make in
+            make.left.equalTo(view.snp.left).offset(20)
+            make.right.equalTo(view.snp.right).offset(-20)
+            make.top.equalTo(view.snp.topMargin).offset(100)
+            make.height.equalTo(100)
+        })
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-            lineWaveView.invalidateDisplayLink()
-            lineWaveView.removeFromSuperview()
+            self.lineWaveView?.amplitude = 10
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                self.lineWaveView?.amplitude = 30
+            })
         })
     }
-
+    
+    deinit {
+        print("VPLineWaveController deinit")
+        lineWaveView?.invalidateDisplayLink()
+    }
 }
