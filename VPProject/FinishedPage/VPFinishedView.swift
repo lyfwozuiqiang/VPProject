@@ -131,7 +131,7 @@ class VPFinishedView: UIView {
     private let levelLabel1:UILabel = {
         let label = UILabel.init()
         label.text = "Normal"
-        label.textColor = UIColor(hex6: 0xA471FE)
+        label.textColor = UIColor(hex6: 0x807BFF)
         label.font = UIFont.russoOneFont(ofSize: 12)
         return label
     }()
@@ -147,7 +147,7 @@ class VPFinishedView: UIView {
     private let levelLabel3:UILabel = {
         let label = UILabel.init()
         label.text = "Excellent"
-        label.textColor = UIColor(hex6: 0x807BFF)
+        label.textColor = UIColor(hex6: 0xA471FE)
         label.font = UIFont.russoOneFont(ofSize: 12)
         return label
     }()
