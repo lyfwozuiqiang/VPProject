@@ -69,6 +69,11 @@ class VPFinishedView: UIView {
         return textView
     }()
     
+    private let animateImageView1:UIImageView = UIImageView.init(image: UIImage(named: "finish_animate_1"))
+    private let animateImageView2:UIImageView = UIImageView.init(image: UIImage(named: "finish_animate_2"))
+    private let animateImageView3:UIImageView = UIImageView.init(image: UIImage(named: "finish_animate_3"))
+    private let animateImageView4:UIImageView = UIImageView.init(image: UIImage(named: "finish_animate_4"))
+    
     // 粒子动画容器
     private let emitterLayer:CAEmitterLayer = {
         let layer = CAEmitterLayer.init()
@@ -248,8 +253,10 @@ class VPFinishedView: UIView {
         if currentCount >= coinCount {
             currentCount = coinCount
             displayLink?.invalidate()
+            coinCountLabel.text = "+\(currentCount)"
+            return
         }
-        coinCountLabel.text = "+\(currentCount)"
+        coinCountLabel.text = "\(currentCount)"
     }
     
     @objc private func reportButtonClick() {
@@ -283,13 +290,33 @@ class VPFinishedView: UIView {
     }
     
     private func addAnimtaionImageView() {
-        let imageView = UIImageView.init()
-        imageView.image = UIImage(named: "finish_animate_1")
-        addSubview(imageView)
-        imageView.snp.makeConstraints { make in
+        addSubview(animateImageView1)
+        animateImageView1.snp.makeConstraints { make in
             make.center.equalTo(coinBgImageView.snp.center)
             make.size.equalTo(283)
         }
+        rotateAnimation(for: animateImageView1, repeatCount: 3, clockwise: true)
+        
+        addSubview(animateImageView2)
+        animateImageView2.snp.makeConstraints { make in
+            make.center.equalTo(coinBgImageView.snp.center)
+            make.size.equalTo(283)
+        }
+        rotateAnimation(for: animateImageView2, repeatCount: 3, clockwise: false)
+        
+        addSubview(animateImageView3)
+        animateImageView3.snp.makeConstraints { make in
+            make.center.equalTo(coinBgImageView.snp.center)
+            make.size.equalTo(283)
+        }
+        rotateAnimation(for: animateImageView3, repeatCount: 3, clockwise: false)
+        
+        addSubview(animateImageView4)
+        animateImageView4.snp.makeConstraints { make in
+            make.center.equalTo(coinBgImageView.snp.center)
+            make.size.equalTo(283)
+        }
+        rotateAnimation(for: animateImageView4, repeatCount: 3, clockwise: true)
     }
     
     private func addEmitterLayer() {
@@ -336,8 +363,8 @@ class VPFinishedView: UIView {
         addSubview(coinCountLabel)
         coinCountLabel.snp.makeConstraints { make in
             make.top.equalTo(coinBgImageView.snp.bottom).offset(-25)
-            make.width.equalTo(200)
-            make.height.equalTo(30)
+            make.width.equalTo(283)
+            make.height.equalTo(40)
             make.centerX.equalTo(coinBgImageView.snp.centerX)
         }
     }
@@ -381,7 +408,7 @@ class VPFinishedView: UIView {
     private func addGradientLayer() {
         progressBgImageView.layer.addSublayer(progressGradientLayer)
         excuteGradientLayerWidthAnimation(fromSize: CGSize(width: 0, height: 10), toSize: CGSize(width: moveWidth1, height: 10))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2, execute: { [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { [self] in
             excuteGradientLayerWidthAnimation(fromSize: CGSize(width: moveWidth1, height: 10), toSize: CGSize(width: moveWidth2, height: 10))
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2, execute: { [self] in
                 reportButton.isHidden = false
@@ -453,9 +480,7 @@ class VPFinishedView: UIView {
         if (seperateCount < 1) {
             seperateCount = 1
         }
-        if displayLink != nil {
-            displayLink?.invalidate()
-        }
+        displayLink?.invalidate()
         displayLink = CADisplayLink(target: self, selector: #selector(countAction))
         if #available(iOS 15.0, *) {
             displayLink?.preferredFrameRateRange = CAFrameRateRange(minimum: framesPerSecond, maximum: framesPerSecond)
@@ -471,6 +496,17 @@ class VPFinishedView: UIView {
         basicAnimation.duration = 1
         basicAnimation.fromValue = 0
         basicAnimation.toValue = 1
+        basicAnimation.isRemovedOnCompletion = false
+        basicAnimation.repeatCount = repeatCount
+        view.layer.add(basicAnimation, forKey: nil)
+    }
+    
+    private func rotateAnimation(for view:UIView, repeatCount:Float, clockwise:Bool) {
+        let basicAnimation = CABasicAnimation.init()
+        basicAnimation.keyPath = "transform.rotation.z"
+        basicAnimation.duration = 1
+        basicAnimation.fromValue = 0
+        basicAnimation.toValue = clockwise ? Float.pi * 2 : -Float.pi * 2
         basicAnimation.isRemovedOnCompletion = false
         basicAnimation.repeatCount = repeatCount
         view.layer.add(basicAnimation, forKey: nil)
