@@ -21,6 +21,8 @@
 		0164B149299F6A550016A4A2 /* VPItemsSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0164B147299F6A550016A4A2 /* VPItemsSelectController.swift */; };
 		016EC94529A63ACD00A107ED /* VPGradientTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016EC94429A63ACD00A107ED /* VPGradientTextView.swift */; };
 		016EC94929A6575000A107ED /* VPStrokeTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016EC94829A6575000A107ED /* VPStrokeTextLabel.swift */; };
+		016EC94B29A744F400A107ED /* VPPolygonBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016EC94A29A744F400A107ED /* VPPolygonBorderView.swift */; };
+		016EC94E29A7471300A107ED /* VPPolygonBorderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016EC94D29A7471300A107ED /* VPPolygonBorderController.swift */; };
 		01AB78EF29A4E44900E311E8 /* VPFinishedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AB78EE29A4E44900E311E8 /* VPFinishedController.swift */; };
 		01AB78F129A4E4D500E311E8 /* VPFinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AB78F029A4E4D500E311E8 /* VPFinishedView.swift */; };
 		01C76F0D299E2CE9000F3B86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C76F0C299E2CE9000F3B86 /* AppDelegate.swift */; };
@@ -51,6 +53,8 @@
 		0164B147299F6A550016A4A2 /* VPItemsSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPItemsSelectController.swift; sourceTree = "<group>"; };
 		016EC94429A63ACD00A107ED /* VPGradientTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPGradientTextView.swift; sourceTree = "<group>"; };
 		016EC94829A6575000A107ED /* VPStrokeTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPStrokeTextLabel.swift; sourceTree = "<group>"; };
+		016EC94A29A744F400A107ED /* VPPolygonBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPPolygonBorderView.swift; sourceTree = "<group>"; };
+		016EC94D29A7471300A107ED /* VPPolygonBorderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPPolygonBorderController.swift; sourceTree = "<group>"; };
 		01AB78EE29A4E44900E311E8 /* VPFinishedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPFinishedController.swift; sourceTree = "<group>"; };
 		01AB78F029A4E4D500E311E8 /* VPFinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPFinishedView.swift; sourceTree = "<group>"; };
 		01C76F09299E2CE9000F3B86 /* VPProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VPProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +105,7 @@
 				011570C529A34E7800B94616 /* VPLineWaveView.swift */,
 				016EC94429A63ACD00A107ED /* VPGradientTextView.swift */,
 				016EC94829A6575000A107ED /* VPStrokeTextLabel.swift */,
+				016EC94A29A744F400A107ED /* VPPolygonBorderView.swift */,
 			);
 			path = CommonView;
 			sourceTree = "<group>";
@@ -121,6 +126,14 @@
 				0164B147299F6A550016A4A2 /* VPItemsSelectController.swift */,
 			);
 			path = VPItemsSelectView;
+			sourceTree = "<group>";
+		};
+		016EC94C29A746AC00A107ED /* PolygonBorder */ = {
+			isa = PBXGroup;
+			children = (
+				016EC94D29A7471300A107ED /* VPPolygonBorderController.swift */,
+			);
+			path = PolygonBorder;
 			sourceTree = "<group>";
 		};
 		01AB78ED29A4E32000E311E8 /* FinishedPage */ = {
@@ -159,6 +172,7 @@
 				01C76F22299F2397000F3B86 /* ListTableViewCell.swift */,
 				01C76F23299F2397000F3B86 /* ListTableViewCell.xib */,
 				011570C329A3495400B94616 /* UIFont+Extension.swift */,
+				016EC94C29A746AC00A107ED /* PolygonBorder */,
 				01AB78ED29A4E32000E311E8 /* FinishedPage */,
 				011570C829A354D500B94616 /* LineWave */,
 				011570B129A2137800B94616 /* VPDialogue */,
@@ -321,10 +335,12 @@
 				011570B929A2255600B94616 /* VPDialogueRightCell.swift in Sources */,
 				01C76F0D299E2CE9000F3B86 /* AppDelegate.swift in Sources */,
 				01C76F0F299E2CE9000F3B86 /* SceneDelegate.swift in Sources */,
+				016EC94B29A744F400A107ED /* VPPolygonBorderView.swift in Sources */,
 				016EC94929A6575000A107ED /* VPStrokeTextLabel.swift in Sources */,
 				011570C229A3212A00B94616 /* VPDialogueController.swift in Sources */,
 				011570CA29A354F600B94616 /* VPLineWaveController.swift in Sources */,
 				0164B149299F6A550016A4A2 /* VPItemsSelectController.swift in Sources */,
+				016EC94E29A7471300A107ED /* VPPolygonBorderController.swift in Sources */,
 				011570B029A0C4D000B94616 /* VPItemCell.swift in Sources */,
 				01C76F28299F268A000F3B86 /* VPBorderLabel.swift in Sources */,
 				011570C629A34E7800B94616 /* VPLineWaveView.swift in Sources */,

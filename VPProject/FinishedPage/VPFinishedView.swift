@@ -11,10 +11,15 @@ import UIColor_Hex_Swift
 
 class VPFinishedView: UIView {
     
+    enum LevelType {
+        case levelNormal
+        case levelGood
+        case levelPerfect
+    }
+    
     var levelText:String? {
         didSet {
             gradientTextView.text = levelText
-            gradientView.isHidden = !(levelText != nil && levelText!.count > 0)
         }
     }
     
@@ -24,21 +29,13 @@ class VPFinishedView: UIView {
         }
     }
     
+    private var moveWidth1:Double = 0
+    private var moveWidth2:Double = 0
+    
     private var displayLink:CADisplayLink?
     private var seperateCount:Double = 0
     private var currentCount:Int64 = 0
     private let framesPerSecond:Float = 30
-    private var moveWidth1:Double {
-        didSet {
-            moveWidth1 = moveWidth1 * 280
-        }
-    }
-    
-    private var moveWidth2:Double {
-        didSet {
-            moveWidth1 = moveWidth1 * 280
-        }
-    }
     
     private let coinBgImageView:UIImageView = {
         let imageView = UIImageView.init()
@@ -68,6 +65,7 @@ class VPFinishedView: UIView {
         let textView = VPGradientTextView.init()
         textView.colors = [UIColor(hex6: 0x55EBFF).cgColor,UIColor(hex6: 0x0294FE).cgColor]
         textView.font = UIFont.russoOneFont(ofSize: 26)
+        textView.isHidden = true
         return textView
     }()
     
@@ -131,6 +129,7 @@ class VPFinishedView: UIView {
     private let levelLabel1:UILabel = {
         let label = UILabel.init()
         label.text = "Normal"
+        label.isHidden = true
         label.textColor = UIColor(hex6: 0x807BFF)
         label.font = UIFont.russoOneFont(ofSize: 12)
         return label
@@ -139,6 +138,7 @@ class VPFinishedView: UIView {
     private let levelLabel2:UILabel = {
         let label = UILabel.init()
         label.text = "Good"
+        label.isHidden = true
         label.textColor = UIColor(hex6: 0x807BFF)
         label.font = UIFont.russoOneFont(ofSize: 12)
         return label
@@ -147,6 +147,7 @@ class VPFinishedView: UIView {
     private let levelLabel3:UILabel = {
         let label = UILabel.init()
         label.text = "Excellent"
+        label.isHidden = true
         label.textColor = UIColor(hex6: 0xA471FE)
         label.font = UIFont.russoOneFont(ofSize: 12)
         return label
@@ -154,6 +155,7 @@ class VPFinishedView: UIView {
     
     private let reportButton:UIButton = {
         let button = UIButton.init()
+        button.isHidden = true
         button.backgroundColor = .green
         button.setTitle("Report", for: .normal)
         return button
@@ -169,16 +171,43 @@ class VPFinishedView: UIView {
     }()
     
     //MARK: —— View life cycle
-    init(moveWidth1:Double,moveWidth2:Double) {
-        self.moveWidth1 = moveWidth1
-        self.moveWidth2 = moveWidth2
+    init(level:LevelType) {
         super.init(frame: CGRectZero)
+
+        if level == .levelNormal {
+            moveWidth1 = 280 * 0.25
+            moveWidth2 = 280 * 0.35
+        } else if level == .levelGood {
+            moveWidth1 = 280 * 0.5
+            moveWidth2 = 280 * 0.65
+        } else {
+            moveWidth1 = 280 * 0.75
+            moveWidth2 = 280 * 0.9
+        }
         
         alpha = 0
         backgroundColor = UIColor.clear
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: { [self] in
+            levelLabel1.isHidden = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: { [self] in
+                levelLabel2.isHidden = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: { [self] in
+                    levelLabel3.isHidden = false
+                    if level == .levelNormal {
+                        alphaAnimation(for: levelLabel1, repeatCount: 3)
+                    } else if level == .levelGood {
+                        alphaAnimation(for: levelLabel2, repeatCount: 3)
+                    } else {
+                        alphaAnimation(for: levelLabel3, repeatCount: 3)
+                    }
+                })
+            })
+        })
+        
         addVisualEffectView()
         addCoinBackgroundImageView()
+        addAnimtaionImageView()
         addEmitterLayer()
         addCoinImageView()
         addGradientView()
@@ -249,6 +278,16 @@ class VPFinishedView: UIView {
         coinBgImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalTo(self).offset(-50)
+            make.size.equalTo(283)
+        }
+    }
+    
+    private func addAnimtaionImageView() {
+        let imageView = UIImageView.init()
+        imageView.image = UIImage(named: "finish_animate_1")
+        addSubview(imageView)
+        imageView.snp.makeConstraints { make in
+            make.center.equalTo(coinBgImageView.snp.center)
             make.size.equalTo(283)
         }
     }
@@ -341,10 +380,19 @@ class VPFinishedView: UIView {
     
     private func addGradientLayer() {
         progressBgImageView.layer.addSublayer(progressGradientLayer)
-        excuteGradientLayerWidthAnimation(fromSize: CGSize(width: 0, height: 10), toSize: CGSize(width: 150, height: 10))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2, execute: {
-            self.excuteGradientLayerWidthAnimation(fromSize: CGSize(width: 150, height: 10), toSize: CGSize(width: 260, height: 10))
-            self.alphaAnimation(for: self.levelLabel3)
+        excuteGradientLayerWidthAnimation(fromSize: CGSize(width: 0, height: 10), toSize: CGSize(width: moveWidth1, height: 10))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2, execute: { [self] in
+            excuteGradientLayerWidthAnimation(fromSize: CGSize(width: moveWidth1, height: 10), toSize: CGSize(width: moveWidth2, height: 10))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2, execute: { [self] in
+                reportButton.isHidden = false
+                alphaAnimation(for: reportButton, repeatCount: 1)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: { [self] in
+                    gradientView.isHidden = false
+                    gradientTextView.isHidden = false
+                    alphaAnimation(for: gradientView, repeatCount: 1)
+                    alphaAnimation(for: gradientTextView, repeatCount: 1)
+                })
+            })
         })
     }
     
@@ -417,14 +465,14 @@ class VPFinishedView: UIView {
         displayLink?.add(to: .current, forMode: .common)
     }
     
-    private func alphaAnimation(for view:UIView) {
+    private func alphaAnimation(for view:UIView, repeatCount:Float) {
         let basicAnimation = CABasicAnimation.init()
         basicAnimation.keyPath = "opacity"
         basicAnimation.duration = 1
         basicAnimation.fromValue = 0
         basicAnimation.toValue = 1
         basicAnimation.isRemovedOnCompletion = false
-        basicAnimation.repeatCount = 2
+        basicAnimation.repeatCount = repeatCount
         view.layer.add(basicAnimation, forKey: nil)
     }
 }

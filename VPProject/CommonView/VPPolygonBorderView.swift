@@ -1,14 +1,14 @@
 //
-//  VPBorderView.swift
+//  VPPolygonBorderView.swift
 //  VPProject
 //
-//  Created by 刘伟 on 2023/2/17.
+//  Created by 刘伟 on 2023/2/23.
 //
 
 import UIKit
 
-class VPBorderView: UIView {
-    
+class VPPolygonBorderView: UIView {
+
     // 边框贝塞尔曲线
     private let borderBezierPath:UIBezierPath = UIBezierPath.init()
     // 边框图层
@@ -24,7 +24,7 @@ class VPBorderView: UIView {
             gradientLayer.colors = borderColors
         }
     }
-    
+    /// 边框颜色方向 默认[(0.,0),(1,1)]
     var borderStartPoint:CGPoint = CGPointZero {
         didSet {
             gradientLayer.startPoint = borderStartPoint
@@ -68,14 +68,29 @@ class VPBorderView: UIView {
         }
     }
     
+    // 边框左侧一小截视图相关
+    private let shortCubeBezierPath = UIBezierPath.init()
+    public var shortCubeColor:CGColor = UIColor.red.cgColor {
+        didSet {
+            shortCubeShapeLayer.strokeColor = shortCubeColor
+        }
+    }
+    private let shortCubeShapeLayer = {
+        let layer = CAShapeLayer.init()
+        layer.strokeColor = UIColor.clear.cgColor
+        layer.fillColor = UIColor.clear.cgColor
+        return layer
+    }()
+    
     /// 上方左右边距
-    var topSpacess:(left:Double,right:Double) = (0,0)
+    var topSpaces:(left:CGPoint,right:CGPoint) = (CGPointZero,CGPointZero)
     /// 左侧上下边距
-    var leftSpaces:(top:Double,bottom:Double) = (0,0)
+    var leftSpaces:(top:CGPoint,bottom:CGPoint) = (CGPointZero,CGPointZero)
     /// 下方左右边距
-    var bottomSpaces:(left:Double,right:Double) = (0,0)
+    var bottomSpaces:(left:CGPoint,right:CGPoint) = (CGPointZero,CGPointZero)
     /// 右侧上下边距
-    var rightSpaces:(top:Double,bottom:Double) = (0,0)
+    var rightSpaces:(top:CGPoint,bottom:CGPoint) = (CGPointZero,CGPointZero)
+    
 
     //MARK: —— View life cycle
     override init(frame: CGRect) {
@@ -89,21 +104,26 @@ class VPBorderView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        updateBorder()
+    }
+    
+    //MARK: —— Private method
+    func updateBorder() {
         // 描绘渐变色边框
         let viewWidth:Double = bounds.size.width, viewHeight = bounds.size.height
         borderBezierPath.removeAllPoints()
-        borderBezierPath.move(to: CGPoint(x: topSpacess.left + borderWidth/2, y: borderWidth/2))
-        borderBezierPath.addLine(to: CGPoint(x: viewWidth - topSpacess.right - borderWidth/2, y: borderWidth/2))
-        borderBezierPath.addLine(to: CGPoint(x: viewWidth - borderWidth, y: rightSpaces.top + borderWidth/2))
-        borderBezierPath.addLine(to: CGPoint(x: viewWidth - borderWidth, y: viewHeight - rightSpaces.bottom - borderWidth/2))
-        borderBezierPath.addLine(to: CGPoint(x: viewWidth - bottomSpaces.right - borderWidth, y: viewHeight - borderWidth))
-        borderBezierPath.addLine(to: CGPoint(x: bottomSpaces.left - borderWidth/2, y: viewHeight - borderWidth))
-        borderBezierPath.addLine(to: CGPoint(x: borderWidth/2, y: viewHeight - leftSpaces.bottom - borderWidth))
-        borderBezierPath.addLine(to: CGPoint(x: borderWidth/2, y: leftSpaces.top + borderWidth/2))
+        borderBezierPath.move(to: CGPoint(x: topSpaces.left.x + borderWidth/2, y: borderWidth/2 + topSpaces.left.y))
+        borderBezierPath.addLine(to: CGPoint(x: viewWidth - topSpaces.right.x - borderWidth/2, y: borderWidth/2 + topSpaces.right.y))
+        borderBezierPath.addLine(to: CGPoint(x: viewWidth - borderWidth/2 - rightSpaces.top.x, y: rightSpaces.top.y + borderWidth/2))
+        borderBezierPath.addLine(to: CGPoint(x: viewWidth - borderWidth/2 - rightSpaces.bottom.x, y: viewHeight - rightSpaces.bottom.y - borderWidth/2))
+        borderBezierPath.addLine(to: CGPoint(x: viewWidth - bottomSpaces.right.x - borderWidth, y: viewHeight - borderWidth/2 - bottomSpaces.right.y))
+        borderBezierPath.addLine(to: CGPoint(x: bottomSpaces.left.x + borderWidth/2, y: viewHeight - borderWidth/2 - bottomSpaces.left.y))
+        borderBezierPath.addLine(to: CGPoint(x: borderWidth/2 + leftSpaces.bottom.x, y: viewHeight - leftSpaces.bottom.y - borderWidth))
+        borderBezierPath.addLine(to: CGPoint(x: borderWidth/2 + leftSpaces.top.x, y: leftSpaces.top.y + borderWidth/2))
         borderBezierPath.close()
         
         borderShapeLayer.lineWidth = borderWidth
-        borderShapeLayer.strokeColor = UIColor.white.cgColor
+        borderShapeLayer.strokeColor = UIColor.green.cgColor
         borderShapeLayer.fillColor = UIColor.clear.cgColor
         borderShapeLayer.path = borderBezierPath.cgPath
         
@@ -117,10 +137,9 @@ class VPBorderView: UIView {
         // 绘制不规则形状背景
         backgroundLayer.strokeColor = UIColor.clear.cgColor
         backgroundLayer.fillColor = UIColor.white.cgColor
-        let concatTransform = CGAffineTransformConcat(CGAffineTransformMakeTranslation(borderWidth/2, borderWidth/2), CGAffineTransformMakeScale((viewWidth - borderWidth)/viewWidth, (viewHeight - borderWidth)/viewHeight))
+        let concatTransform = CGAffineTransformConcat(CGAffineTransformMakeTranslation(borderWidth/2, borderWidth/2), CGAffineTransformMakeScale((viewWidth - borderWidth + 0.5)/viewWidth, (viewHeight - borderWidth + 0.5)/viewHeight))
         borderBezierPath.apply(concatTransform)
         backgroundLayer.path = borderBezierPath.cgPath
-        layer.addSublayer(backgroundLayer)
         
         backgroundGradientLayer.frame = bounds
         backgroundGradientLayer.startPoint = backgroundStartPoint
@@ -128,5 +147,14 @@ class VPBorderView: UIView {
         backgroundGradientLayer.colors = backgroundColors
         backgroundGradientLayer.mask = backgroundLayer
         layer.addSublayer(backgroundGradientLayer)
+        
+        shortCubeShapeLayer.lineWidth = borderWidth + 4
+        shortCubeBezierPath.removeAllPoints()
+        shortCubeBezierPath.move(to: CGPoint(x: leftSpaces.top.x - borderWidth/2, y: leftSpaces.top.y + borderWidth/2))
+        shortCubeBezierPath.addLine(to: CGPoint(x: leftSpaces.bottom.x + borderWidth, y: viewHeight - leftSpaces.bottom.y - borderWidth/2))
+        let contatTransfrom = CGAffineTransformConcat(CGAffineTransform(scaleX: (borderWidth + 4)/leftSpaces.top.x, y: 20/viewHeight), CGAffineTransformMakeTranslation(leftSpaces.top.x/2 - borderWidth/2 - 2, (viewHeight - 20)/2))
+        shortCubeBezierPath.apply(contatTransfrom)
+        shortCubeShapeLayer.path = shortCubeBezierPath.cgPath
+        layer.addSublayer(shortCubeShapeLayer)
     }
 }

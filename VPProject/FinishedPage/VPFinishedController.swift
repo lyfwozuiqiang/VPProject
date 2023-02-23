@@ -24,7 +24,7 @@ class VPFinishedController: UIViewController {
     }
     
     @objc func buttonClick() {
-        let finishView = VPFinishedView.init(moveWidth1: 0.4, moveWidth2: 0.8)
+        let finishView = VPFinishedView.init(level: .levelNormal)
         finishView.levelText = "Perfect Complete"
         finishView.coinCount = 1238
         view.addSubview(finishView)
