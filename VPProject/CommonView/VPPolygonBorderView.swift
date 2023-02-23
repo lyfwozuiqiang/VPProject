@@ -148,11 +148,15 @@ class VPPolygonBorderView: UIView {
         backgroundGradientLayer.mask = backgroundLayer
         layer.addSublayer(backgroundGradientLayer)
         
-        shortCubeShapeLayer.lineWidth = borderWidth + 4
+        var cubeLineWidth:CGFloat = 0
+        if borderWidth > 0 {
+            cubeLineWidth = borderWidth + 4.0
+        }
+        shortCubeShapeLayer.lineWidth = cubeLineWidth
         shortCubeBezierPath.removeAllPoints()
-        shortCubeBezierPath.move(to: CGPoint(x: leftSpaces.top.x - borderWidth/2, y: leftSpaces.top.y + borderWidth/2))
-        shortCubeBezierPath.addLine(to: CGPoint(x: leftSpaces.bottom.x + borderWidth, y: viewHeight - leftSpaces.bottom.y - borderWidth/2))
-        let contatTransfrom = CGAffineTransformConcat(CGAffineTransform(scaleX: (borderWidth + 4)/leftSpaces.top.x, y: 20/viewHeight), CGAffineTransformMakeTranslation(leftSpaces.top.x/2 - borderWidth/2 - 2, (viewHeight - 20)/2))
+        shortCubeBezierPath.move(to: CGPoint(x: leftSpaces.top.x + borderWidth/2, y: leftSpaces.top.y + borderWidth/2))
+        shortCubeBezierPath.addLine(to: CGPoint(x: leftSpaces.bottom.x + borderWidth/2, y: viewHeight - leftSpaces.bottom.y - borderWidth/2))
+        let contatTransfrom = CGAffineTransformConcat(CGAffineTransform(scaleX: borderWidth/2/(leftSpaces.top.x + borderWidth/2), y: 20/(viewHeight - leftSpaces.top.y - leftSpaces.bottom.y)), CGAffineTransformMakeTranslation(leftSpaces.top.x/2, (viewHeight - 20)/2))
         shortCubeBezierPath.apply(contatTransfrom)
         shortCubeShapeLayer.path = shortCubeBezierPath.cgPath
         layer.addSublayer(shortCubeShapeLayer)
