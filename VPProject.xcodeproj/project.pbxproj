@@ -35,6 +35,12 @@
 		01C76F25299F2397000F3B86 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C76F23299F2397000F3B86 /* ListTableViewCell.xib */; };
 		01C76F28299F268A000F3B86 /* VPBorderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C76F27299F268A000F3B86 /* VPBorderLabel.swift */; };
 		01C76F2A299F27C8000F3B86 /* VPBorderLabelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C76F29299F27C8000F3B86 /* VPBorderLabelController.swift */; };
+		01E2F6B129A87D4300332F13 /* VPPronounceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2F6B029A87D4300332F13 /* VPPronounceController.swift */; };
+		01E2F6B329A87DD800332F13 /* VPPronounceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2F6B229A87DD800332F13 /* VPPronounceView.swift */; };
+		01FAB3C629AA183600E70207 /* VPLearningReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FAB3C529AA183600E70207 /* VPLearningReportController.swift */; };
+		01FAB3CA29AA460100E70207 /* VPLearningReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FAB3C929AA460100E70207 /* VPLearningReportView.swift */; };
+		01FAB3CC29AB854200E70207 /* VPProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FAB3CB29AB854200E70207 /* VPProgressView.swift */; };
+		01FAB3CE29AC60B800E70207 /* SceneCourseStudySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FAB3CD29AC60B800E70207 /* SceneCourseStudySummary.swift */; };
 		D03266D9366C94AA8DBF4510 /* Pods_VPProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30585678472267F0001F9790 /* Pods_VPProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +75,12 @@
 		01C76F23299F2397000F3B86 /* ListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
 		01C76F27299F268A000F3B86 /* VPBorderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPBorderLabel.swift; sourceTree = "<group>"; };
 		01C76F29299F27C8000F3B86 /* VPBorderLabelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPBorderLabelController.swift; sourceTree = "<group>"; };
+		01E2F6B029A87D4300332F13 /* VPPronounceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPPronounceController.swift; sourceTree = "<group>"; };
+		01E2F6B229A87DD800332F13 /* VPPronounceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPPronounceView.swift; sourceTree = "<group>"; };
+		01FAB3C529AA183600E70207 /* VPLearningReportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPLearningReportController.swift; sourceTree = "<group>"; };
+		01FAB3C929AA460100E70207 /* VPLearningReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPLearningReportView.swift; sourceTree = "<group>"; };
+		01FAB3CB29AB854200E70207 /* VPProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPProgressView.swift; sourceTree = "<group>"; };
+		01FAB3CD29AC60B800E70207 /* SceneCourseStudySummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCourseStudySummary.swift; sourceTree = "<group>"; };
 		30585678472267F0001F9790 /* Pods_VPProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VPProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50688C4A03E850EE41023470 /* Pods-VPProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VPProject.debug.xcconfig"; path = "Target Support Files/Pods-VPProject/Pods-VPProject.debug.xcconfig"; sourceTree = "<group>"; };
 		EFBE52073CBB14B2BFB87F11 /* Pods-VPProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VPProject.release.xcconfig"; path = "Target Support Files/Pods-VPProject/Pods-VPProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +143,7 @@
 		016EC94C29A746AC00A107ED /* PolygonBorder */ = {
 			isa = PBXGroup;
 			children = (
+				01AB78F029A4E4D500E311E8 /* VPFinishedView.swift */,
 				016EC94D29A7471300A107ED /* VPPolygonBorderController.swift */,
 			);
 			path = PolygonBorder;
@@ -140,7 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				01AB78EE29A4E44900E311E8 /* VPFinishedController.swift */,
-				01AB78F029A4E4D500E311E8 /* VPFinishedView.swift */,
 			);
 			path = FinishedPage;
 			sourceTree = "<group>";
@@ -172,6 +184,8 @@
 				01C76F22299F2397000F3B86 /* ListTableViewCell.swift */,
 				01C76F23299F2397000F3B86 /* ListTableViewCell.xib */,
 				011570C329A3495400B94616 /* UIFont+Extension.swift */,
+				01FAB3C429AA17D000E70207 /* VPLearningReport */,
+				01E2F6AF29A87D3100332F13 /* PronounceIndicator */,
 				016EC94C29A746AC00A107ED /* PolygonBorder */,
 				01AB78ED29A4E32000E311E8 /* FinishedPage */,
 				011570C829A354D500B94616 /* LineWave */,
@@ -194,6 +208,26 @@
 				01C76F29299F27C8000F3B86 /* VPBorderLabelController.swift */,
 			);
 			path = BorderLabel;
+			sourceTree = "<group>";
+		};
+		01E2F6AF29A87D3100332F13 /* PronounceIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				01E2F6B029A87D4300332F13 /* VPPronounceController.swift */,
+				01E2F6B229A87DD800332F13 /* VPPronounceView.swift */,
+			);
+			path = PronounceIndicator;
+			sourceTree = "<group>";
+		};
+		01FAB3C429AA17D000E70207 /* VPLearningReport */ = {
+			isa = PBXGroup;
+			children = (
+				01FAB3C529AA183600E70207 /* VPLearningReportController.swift */,
+				01FAB3C929AA460100E70207 /* VPLearningReportView.swift */,
+				01FAB3CB29AB854200E70207 /* VPProgressView.swift */,
+				01FAB3CD29AC60B800E70207 /* SceneCourseStudySummary.swift */,
+			);
+			path = VPLearningReport;
 			sourceTree = "<group>";
 		};
 		19B0D1618D26A6FAF0D42682 /* Pods */ = {
@@ -336,15 +370,21 @@
 				01C76F0D299E2CE9000F3B86 /* AppDelegate.swift in Sources */,
 				01C76F0F299E2CE9000F3B86 /* SceneDelegate.swift in Sources */,
 				016EC94B29A744F400A107ED /* VPPolygonBorderView.swift in Sources */,
+				01FAB3CA29AA460100E70207 /* VPLearningReportView.swift in Sources */,
+				01FAB3C629AA183600E70207 /* VPLearningReportController.swift in Sources */,
 				016EC94929A6575000A107ED /* VPStrokeTextLabel.swift in Sources */,
 				011570C229A3212A00B94616 /* VPDialogueController.swift in Sources */,
+				01E2F6B329A87DD800332F13 /* VPPronounceView.swift in Sources */,
 				011570CA29A354F600B94616 /* VPLineWaveController.swift in Sources */,
+				01FAB3CC29AB854200E70207 /* VPProgressView.swift in Sources */,
+				01E2F6B129A87D4300332F13 /* VPPronounceController.swift in Sources */,
 				0164B149299F6A550016A4A2 /* VPItemsSelectController.swift in Sources */,
 				016EC94E29A7471300A107ED /* VPPolygonBorderController.swift in Sources */,
 				011570B029A0C4D000B94616 /* VPItemCell.swift in Sources */,
 				01C76F28299F268A000F3B86 /* VPBorderLabel.swift in Sources */,
 				011570C629A34E7800B94616 /* VPLineWaveView.swift in Sources */,
 				0164B146299F5E500016A4A2 /* VPItemsSelectView.swift in Sources */,
+				01FAB3CE29AC60B800E70207 /* SceneCourseStudySummary.swift in Sources */,
 				01C76F24299F2397000F3B86 /* ListTableViewCell.swift in Sources */,
 				011570B729A2254600B94616 /* VPDialogueLeftCell.swift in Sources */,
 				011570BE29A2295F00B94616 /* VPGradientView.swift in Sources */,

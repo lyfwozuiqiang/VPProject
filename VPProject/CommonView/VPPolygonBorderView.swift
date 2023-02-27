@@ -137,7 +137,7 @@ class VPPolygonBorderView: UIView {
         // 绘制不规则形状背景
         backgroundLayer.strokeColor = UIColor.clear.cgColor
         backgroundLayer.fillColor = UIColor.white.cgColor
-        let concatTransform = CGAffineTransformConcat(CGAffineTransformMakeTranslation(borderWidth/2, borderWidth/2), CGAffineTransformMakeScale((viewWidth - borderWidth + 0.5)/viewWidth, (viewHeight - borderWidth + 0.5)/viewHeight))
+        let concatTransform = CGAffineTransformConcat(CGAffineTransformMakeTranslation(borderWidth/2, borderWidth/2), CGAffineTransformMakeScale((viewWidth - borderWidth + 0.5)/viewWidth, (viewHeight - borderWidth)/viewHeight))
         borderBezierPath.apply(concatTransform)
         backgroundLayer.path = borderBezierPath.cgPath
         
