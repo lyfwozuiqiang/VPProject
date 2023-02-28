@@ -21,7 +21,7 @@ class VPPronounceController: UIViewController {
     }
      
     @objc func buttonClick() {
-        let model = PronounceViewModel.init(containerSide:.left(space:30),containerPosition:.bottom(CGPoint(x: 100, y: 200)), isShowTriangle: true, americanAccent: "美/ˈmɔːnɪŋ/", britishAccent: "英/ˈmɔːnɪŋ/", translateContent: ["n.buổi sáng, sáng sớm","n.buổi sáng, sáng sớm","adj.buổi sáng, sáng sớm buổi sáng, sáng sớmbuổi sáng, sáng sớm"])
+        let model = PronounceViewModel.init(containerSide:.left(space:30),containerPosition:.bottom(CGPoint(x: 177.0, y: 585)), isShowTriangle: true, americanAccent: nil, britishAccent: "英/ˈmɔːnɪŋ/", translateContent: nil)
         let pronounceView = VPPronounceView.init(with: model)
         view.addSubview(pronounceView)
         pronounceView.snp.makeConstraints { make in

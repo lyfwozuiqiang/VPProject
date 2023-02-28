@@ -140,19 +140,19 @@ class VPProgressView: UIView {
         super.layoutSubviews()
         let viewWidth = bounds.size.width
         borderPath.removeAllPoints()
-        borderPath.addArc(withCenter: CGPoint(x: viewWidth/2, y: viewWidth/2), radius: viewWidth/2, startAngle: 0, endAngle: CGFloat(Float.pi) * 2, clockwise: true)
+        borderPath.addArc(withCenter: CGPoint(x: viewWidth/2, y: viewWidth/2), radius: viewWidth/2 - borderWidth/2, startAngle: 0, endAngle: CGFloat(Float.pi) * 2, clockwise: true)
         borderLayer.path = borderPath.cgPath
         borderGradientLayer.frame = bounds
         borderGradientLayer.mask = borderLayer
         
         leftProgressPath.removeAllPoints()
-        leftProgressPath.addArc(withCenter: CGPoint(x: viewWidth/2, y: viewWidth/2), radius: viewWidth/2 - borderWidth/2 - 3 - progressWidth/2, startAngle: CGFloat(Float.pi)/2, endAngle: CGFloat(Float.pi)/2*3, clockwise: true)
+        leftProgressPath.addArc(withCenter: CGPoint(x: viewWidth/2, y: viewWidth/2), radius: viewWidth/2 - borderWidth/2 - 5 - progressWidth/2, startAngle: CGFloat(Float.pi)/2, endAngle: CGFloat(Float.pi)/2*3, clockwise: true)
         leftProgressLayer.path = leftProgressPath.cgPath
         leftGradientLayer.frame = CGRect(x: 0, y: 0, width: viewWidth/2, height: viewWidth)
         leftGradientLayer.mask = leftProgressLayer
 
         rightProgressPath.removeAllPoints()
-        rightProgressPath.addArc(withCenter: CGPoint(x: viewWidth/2, y: viewWidth/2), radius: viewWidth/2 - borderWidth/2 - 3 - progressWidth/2, startAngle: -CGFloat(Float.pi)/2, endAngle: CGFloat(Float.pi)/2, clockwise: true)
+        rightProgressPath.addArc(withCenter: CGPoint(x: viewWidth/2, y: viewWidth/2), radius: viewWidth/2 - borderWidth/2 - 5 - progressWidth/2, startAngle: -CGFloat(Float.pi)/2, endAngle: CGFloat(Float.pi)/2, clockwise: true)
         rightProgressLayer.path = rightProgressPath.cgPath
         rightGradientLayer.frame = CGRect(x: viewWidth/2, y: 0, width: viewWidth, height: viewWidth)
         rightGradientLayer.mask = rightProgressLayer

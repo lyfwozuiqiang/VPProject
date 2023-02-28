@@ -15,6 +15,7 @@ class VPLearningReportView: UIView {
     private let backgroundImageView:UIImageView = {
         let imageView = UIImageView.init(image: UIImage(named: "learn_report_background_image"))
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -48,7 +49,7 @@ class VPLearningReportView: UIView {
         view.borderWidth = 1
         view.borderColors = [UIColor(hex6: 0x55EBFF).cgColor,UIColor(hex6: 0x6631FF).cgColor,UIColor(hex6: 0x4EEFF9).cgColor]
         view.borderEndPoint = CGPoint(x: 1, y: 0)
-        view.backgroundColors = [UIColor(hex6: 0x9883EA).cgColor,UIColor(hex6: 0x4335FF).cgColor,UIColor(hex6: 0x0E050B).cgColor]
+        view.backgroundColors = [UIColor(hex6: 0x9883EA).cgColor,UIColor(hex6: 0x4335FF,alpha: 0.6).cgColor,UIColor(hex6: 0x0E050B,alpha: 0.6).cgColor]
         view.backgroundEndPoint = CGPoint(x: 1, y: 0)
         view.leftSpaces = (CGPoint(x: 5, y: 15),CGPointZero)
         view.topSpaces = (CGPoint(x: 15, y: 0),CGPointZero)
@@ -263,7 +264,7 @@ class VPLearningReportView: UIView {
         reportScrollView.addSubview(dragonImageView)
         dragonImageView.snp.makeConstraints { make in
             make.right.equalTo(self).offset(-24)
-            make.size.equalTo(100)
+            make.size.equalTo(104)
             make.centerY.equalTo(reportBgView.snp.centerY)
         }
         
@@ -424,7 +425,7 @@ class VPLearningReportView: UIView {
         greatImageView.snp.makeConstraints { make in
             make.left.equalTo(conclutionImageView.snp.left).offset(30)
             make.top.equalTo(timeProgressView.snp.bottom).offset(50)
-            make.size.equalTo(22)
+            make.size.equalTo(30)
         }
         
         reportScrollView.addSubview(greatLabel)
@@ -462,7 +463,7 @@ class VPLearningReportView: UIView {
             } else {
                 make.top.equalTo(greatImageView.snp.bottom).offset(35)
             }
-            make.size.equalTo(22)
+            make.size.equalTo(30)
         }
         reportScrollView.addSubview(improveLabel)
         improveLabel.snp.makeConstraints { make in

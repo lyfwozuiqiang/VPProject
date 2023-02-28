@@ -29,11 +29,11 @@ struct PronounceViewModel {
     // 是否展示指示三角形,位置为PronounceViewPosition指定点位置
     let isShowTriangle:Bool
     // 美式发音
-    let americanAccent:String
+    let americanAccent:String?
     // 英式发音
-    let britishAccent:String
+    let britishAccent:String?
     // 词性
-    let translateContent:Array<String>
+    let translateContent:Array<String>?
 }
 
 class VPPronounceView: UIView {
@@ -129,6 +129,7 @@ class VPPronounceView: UIView {
             make.left.equalToSuperview().offset(12)
             make.centerY.equalTo(britishPronounceButton.snp.centerY)
         }
+        britishPronounceButton.isHidden = pronounceModel.britishAccent == nil
         britishPronounceButton.snp.makeConstraints { make in
             make.right.lessThanOrEqualTo(containerView.snp.right).offset(-12)
             make.size.equalTo(34)
@@ -144,6 +145,7 @@ class VPPronounceView: UIView {
                 make.right.equalTo(americanPronounceButton.snp.left)
             }
         }
+        americanPronounceButton.isHidden = pronounceModel.americanAccent == nil
         americanPronounceButton.snp.makeConstraints { make in
             make.size.equalTo(34)
             if isBritishOverHalfWidth || isAmericanOverHalfWidth {
@@ -157,12 +159,12 @@ class VPPronounceView: UIView {
         }
         
         var previousLabel:UILabel?
-        for index in 0..<pronounceModel.translateContent.count {
+        for index in 0..<(pronounceModel.translateContent?.count ?? 0) {
             let itemLabel = UILabel.init()
             itemLabel.numberOfLines = 0
             itemLabel.font = UIFont.pingFangSCRFont(ofSize: 12)
             itemLabel.textColor = UIColor(hex6: 0xF9FAFA)
-            itemLabel.text = pronounceModel.translateContent[index]
+            itemLabel.text = pronounceModel.translateContent?[index]
             containerView.addSubview(itemLabel)
             itemLabel.snp.makeConstraints { make in
                 make.left.equalTo(containerView).offset(12)
@@ -245,8 +247,11 @@ class VPPronounceView: UIView {
     }
     
     //MARK: —— Pirvate method
-    private func calculateLength(text:String, maxWidth:CGFloat) -> CGFloat {
-        let textSize:CGSize = (text as NSString).boundingRect(with: CGSize(width: maxWidth, height: 1000), attributes: [.font:UIFont.pingFangSCRFont(ofSize: 12)], context: nil).size
+    private func calculateLength(text:String?, maxWidth:CGFloat) -> CGFloat {
+        if text == nil {
+            return 0.0
+        }
+        let textSize:CGSize = (text! as NSString).boundingRect(with: CGSize(width: maxWidth, height: 1000), attributes: [.font:UIFont.pingFangSCRFont(ofSize: 12)], context: nil).size
         return textSize.width
     }
 }
