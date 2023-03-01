@@ -41,6 +41,14 @@
 		01FAB3CA29AA460100E70207 /* VPLearningReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FAB3C929AA460100E70207 /* VPLearningReportView.swift */; };
 		01FAB3CC29AB854200E70207 /* VPProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FAB3CB29AB854200E70207 /* VPProgressView.swift */; };
 		01FAB3CE29AC60B800E70207 /* SceneCourseStudySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FAB3CD29AC60B800E70207 /* SceneCourseStudySummary.swift */; };
+		01FAB3D129ADC76000E70207 /* VPFollowReadingResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FAB3D029ADC76000E70207 /* VPFollowReadingResultView.swift */; };
+		01FAB3D429ADC77800E70207 /* VPFollowReadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FAB3D229ADC77800E70207 /* VPFollowReadingController.swift */; };
+		01FAB3D529ADC77800E70207 /* VPFollowReadingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01FAB3D329ADC77800E70207 /* VPFollowReadingController.xib */; };
+		01FAB3DC29AF2E0000E70207 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 01FAB3D729AF2E0000E70207 /* Montserrat-Bold.otf */; };
+		01FAB3DD29AF2E0000E70207 /* RussoOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01FAB3D829AF2E0000E70207 /* RussoOne-Regular.ttf */; };
+		01FAB3DE29AF2E0000E70207 /* Montserrat-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 01FAB3D929AF2E0000E70207 /* Montserrat-Medium.otf */; };
+		01FAB3DF29AF2E0000E70207 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 01FAB3DA29AF2E0000E70207 /* Montserrat-Regular.otf */; };
+		01FAB3E029AF2E0000E70207 /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 01FAB3DB29AF2E0000E70207 /* Montserrat-SemiBold.otf */; };
 		D03266D9366C94AA8DBF4510 /* Pods_VPProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30585678472267F0001F9790 /* Pods_VPProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +89,14 @@
 		01FAB3C929AA460100E70207 /* VPLearningReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPLearningReportView.swift; sourceTree = "<group>"; };
 		01FAB3CB29AB854200E70207 /* VPProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPProgressView.swift; sourceTree = "<group>"; };
 		01FAB3CD29AC60B800E70207 /* SceneCourseStudySummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCourseStudySummary.swift; sourceTree = "<group>"; };
+		01FAB3D029ADC76000E70207 /* VPFollowReadingResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPFollowReadingResultView.swift; sourceTree = "<group>"; };
+		01FAB3D229ADC77800E70207 /* VPFollowReadingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPFollowReadingController.swift; sourceTree = "<group>"; };
+		01FAB3D329ADC77800E70207 /* VPFollowReadingController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VPFollowReadingController.xib; sourceTree = "<group>"; };
+		01FAB3D729AF2E0000E70207 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
+		01FAB3D829AF2E0000E70207 /* RussoOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RussoOne-Regular.ttf"; sourceTree = "<group>"; };
+		01FAB3D929AF2E0000E70207 /* Montserrat-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.otf"; sourceTree = "<group>"; };
+		01FAB3DA29AF2E0000E70207 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
+		01FAB3DB29AF2E0000E70207 /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
 		30585678472267F0001F9790 /* Pods_VPProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VPProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50688C4A03E850EE41023470 /* Pods-VPProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VPProject.debug.xcconfig"; path = "Target Support Files/Pods-VPProject/Pods-VPProject.debug.xcconfig"; sourceTree = "<group>"; };
 		EFBE52073CBB14B2BFB87F11 /* Pods-VPProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VPProject.release.xcconfig"; path = "Target Support Files/Pods-VPProject/Pods-VPProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -184,6 +200,7 @@
 				01C76F22299F2397000F3B86 /* ListTableViewCell.swift */,
 				01C76F23299F2397000F3B86 /* ListTableViewCell.xib */,
 				011570C329A3495400B94616 /* UIFont+Extension.swift */,
+				01FAB3CF29ADC6F500E70207 /* FollowReadingResult */,
 				01FAB3C429AA17D000E70207 /* VPLearningReport */,
 				01E2F6AF29A87D3100332F13 /* PronounceIndicator */,
 				016EC94C29A746AC00A107ED /* PolygonBorder */,
@@ -197,6 +214,7 @@
 				01C76F15299E2CE9000F3B86 /* Assets.xcassets */,
 				01C76F17299E2CE9000F3B86 /* LaunchScreen.storyboard */,
 				01C76F1A299E2CE9000F3B86 /* Info.plist */,
+				01FAB3D629AF2E0000E70207 /* montserrat */,
 			);
 			path = VPProject;
 			sourceTree = "<group>";
@@ -228,6 +246,28 @@
 				01FAB3CD29AC60B800E70207 /* SceneCourseStudySummary.swift */,
 			);
 			path = VPLearningReport;
+			sourceTree = "<group>";
+		};
+		01FAB3CF29ADC6F500E70207 /* FollowReadingResult */ = {
+			isa = PBXGroup;
+			children = (
+				01FAB3D029ADC76000E70207 /* VPFollowReadingResultView.swift */,
+				01FAB3D229ADC77800E70207 /* VPFollowReadingController.swift */,
+				01FAB3D329ADC77800E70207 /* VPFollowReadingController.xib */,
+			);
+			path = FollowReadingResult;
+			sourceTree = "<group>";
+		};
+		01FAB3D629AF2E0000E70207 /* montserrat */ = {
+			isa = PBXGroup;
+			children = (
+				01FAB3D729AF2E0000E70207 /* Montserrat-Bold.otf */,
+				01FAB3D829AF2E0000E70207 /* RussoOne-Regular.ttf */,
+				01FAB3D929AF2E0000E70207 /* Montserrat-Medium.otf */,
+				01FAB3DA29AF2E0000E70207 /* Montserrat-Regular.otf */,
+				01FAB3DB29AF2E0000E70207 /* Montserrat-SemiBold.otf */,
+			);
+			path = montserrat;
 			sourceTree = "<group>";
 		};
 		19B0D1618D26A6FAF0D42682 /* Pods */ = {
@@ -309,9 +349,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C76F19299E2CE9000F3B86 /* LaunchScreen.storyboard in Resources */,
+				01FAB3DE29AF2E0000E70207 /* Montserrat-Medium.otf in Resources */,
 				01C76F25299F2397000F3B86 /* ListTableViewCell.xib in Resources */,
+				01FAB3DD29AF2E0000E70207 /* RussoOne-Regular.ttf in Resources */,
+				01FAB3D529ADC77800E70207 /* VPFollowReadingController.xib in Resources */,
 				01C76F16299E2CE9000F3B86 /* Assets.xcassets in Resources */,
 				01C76F14299E2CE9000F3B86 /* Main.storyboard in Resources */,
+				01FAB3DC29AF2E0000E70207 /* Montserrat-Bold.otf in Resources */,
+				01FAB3DF29AF2E0000E70207 /* Montserrat-Regular.otf in Resources */,
+				01FAB3E029AF2E0000E70207 /* Montserrat-SemiBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +427,8 @@
 				0164B149299F6A550016A4A2 /* VPItemsSelectController.swift in Sources */,
 				016EC94E29A7471300A107ED /* VPPolygonBorderController.swift in Sources */,
 				011570B029A0C4D000B94616 /* VPItemCell.swift in Sources */,
+				01FAB3D429ADC77800E70207 /* VPFollowReadingController.swift in Sources */,
+				01FAB3D129ADC76000E70207 /* VPFollowReadingResultView.swift in Sources */,
 				01C76F28299F268A000F3B86 /* VPBorderLabel.swift in Sources */,
 				011570C629A34E7800B94616 /* VPLineWaveView.swift in Sources */,
 				0164B146299F5E500016A4A2 /* VPItemsSelectView.swift in Sources */,

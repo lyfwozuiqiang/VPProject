@@ -18,8 +18,9 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         ["title":"声波动画","class":"VPLineWaveController"],["title":"结束页面","class":"VPFinishedController"],
         ["title":"多边形Border","class":"VPPolygonBorderController"],
         ["title":"读音气泡","class":"VPPronounceController"],
-        ["title":"学习报告","class":"VPLearningReportController"]]
-        
+        ["title":"学习报告","class":"VPLearningReportController"],
+        ["title":"跟读结果动画","class":"VPFollowReadingController"]]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
