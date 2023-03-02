@@ -50,7 +50,7 @@ class VPFollowReadingResultView: UIView {
     private let messageLabel:UILabel = {
         let label = UILabel.init()
         label.isHidden = true
-        label.font = UIFont.montserratRegularFont(ofSize: 16)
+        label.font = UIFont.montserratSemiBoldItalicFont(ofSize: 16)
         return label
     }()
     private let messageBgView:VPPolygonBorderView = {
@@ -90,9 +90,6 @@ class VPFollowReadingResultView: UIView {
     private var displayLink:CADisplayLink?
     private var animateTitleString:String = ""
     private var titleIndex:Int = 0
-    private var animateMessageString:String = ""
-    private var messageIndex:Int = 0
-    private var messageWidthConstraint:NSLayoutConstraint?
     
     //MARK: —— View life cycle
     init(with model:FollowReadingViewModel) {
@@ -168,7 +165,7 @@ class VPFollowReadingResultView: UIView {
     
     //MARK: —— Action
     @objc func displayLinkAction() {
-        if titleIndex > 600 {
+        if titleIndex > 300 {
             displayLink?.invalidate()
         }
         titleIndex += 1
@@ -185,25 +182,19 @@ class VPFollowReadingResultView: UIView {
                 let font = UIFont(descriptor: fontDescriptor, size: 28)
                 textAttributeStr.addAttributes([.font:font,.shadow:strShadow,.foregroundColor:viewModel.titleColor as Any], range: NSRange(location: 0, length: textAttributeStr.length))
                 titleLabel.attributedText = textAttributeStr
-            }
-        }
-        
-        if viewModel.message != nil && messageIndex > 0 {
-            messageCharacterAnimation()
-            if viewModel.message == animateMessageString {
-                displayLink?.invalidate()
+                if animateTitleString.count == viewModel.title?.count {
+                    displayLink?.invalidate()
+                }
             }
         }
     }
     
     //MARK: —— Public method
     func excuteAnimation() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: { [self] in
-            titleBgViewAnimation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [self] in
+            titleAnimation()
+            messageAnimation()
             lineViewAnimation()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: { [self] in
-                titleLabelAnimation()
-            })
         })
         
         displayLink?.invalidate()
@@ -218,75 +209,41 @@ class VPFollowReadingResultView: UIView {
     
     
     //MARK: —— Private method
-    private func titleLabelAnimation() {
-        let currentFrame = titleLabel.frame
-        titleLabel.frame = CGRect(x: currentFrame.origin.x + 300, y: currentFrame.origin.y, width: currentFrame.size.width, height: currentFrame.size.width)
+    private func titleAnimation() {
+        let titleLabelFrame = titleLabel.frame
+        titleLabel.frame = CGRect(origin: CGPoint(x: titleLabelFrame.origin.x + 300, y: titleLabelFrame.origin.y), size: titleLabelFrame.size)
+        
+        let titleBgFrame = titleBgView.frame
+        titleBgView.frame = CGRect(origin: CGPoint(x: titleBgFrame.origin.x + 300, y: titleBgFrame.origin.y), size: titleBgFrame.size)
+        
         UIView.animate(withDuration: 0.4) { [self] in
             titleLabel.isHidden = false
-            titleLabel.frame = currentFrame
-        }
-    }
-    
-    private func titleBgViewAnimation() {
-        let currentFrame = titleBgView.frame
-        titleBgView.frame = CGRect(x: currentFrame.origin.x + 300, y: currentFrame.origin.y, width: currentFrame.size.width, height: currentFrame.size.width)
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1) { [self] in
+            titleLabel.frame = titleLabelFrame
             titleBgView.isHidden = false
-            titleBgView.frame = currentFrame
-        } completion: { finished in
-            if finished {
-                let bgView = VPPolygonBorderView.init(frame: self.titleBgView.frame)
-                bgView.backgroundColors = self.viewModel.titleBgColors ?? [UIColor.clear.cgColor]
-                bgView.backgroundEndPoint = CGPoint(x: 1, y: 0)
-                bgView.topSpaces = (CGPoint(x: 10, y: 0),CGPointZero)
-                bgView.leftSpaces = (CGPoint(x: 10, y: 0),CGPointZero)
-                bgView.bottomSpaces = (CGPointZero,CGPoint(x: 10, y: 0))
-                bgView.rightSpaces = (CGPointZero,CGPoint(x: 10, y: 0))
-                self.containerView.insertSubview(bgView, belowSubview: self.titleLabel)
-                UIView.animate(withDuration: 0.5) {
-                    bgView.transform = CGAffineTransformMakeScale(1.3, 2)
-                } completion: { finished in
-                    UIView.animate(withDuration: 0.3) {
-                        bgView.alpha = 0
-                    } completion: { finish in
-                        bgView.removeFromSuperview()
-                        self.messageBgViewAnimation()
-                    }
-                }
-            }
+            titleBgView.frame = titleBgFrame
         }
     }
     
-    private func messageBgViewAnimation() {
-        let currentFrame = messageBgView.frame
-        messageBgView.frame = CGRect(origin: CGPoint(x: currentFrame.origin.x - 30, y: currentFrame.origin.y - 5), size: currentFrame.size)
-        messageBgView.isHidden = false
+    private func messageAnimation() {
+        let messageBgFrame = messageBgView.frame
+        messageBgView.frame = CGRect(origin: CGPoint(x: messageBgFrame.origin.x + 300, y: messageBgFrame.origin.y), size: messageBgFrame.size)
         
-        UIView.animate(withDuration: 0.5) { [self] in
+        let messageLabelFrame = messageLabel.frame
+        messageLabel.frame = CGRect(origin: CGPoint(x: messageLabelFrame.origin.x + 300, y: messageLabelFrame.origin.y), size: messageLabelFrame.size)
+        
+        let cubeFrame = leftCubeView.frame
+        leftCubeView.frame = CGRect(origin: CGPoint(x: cubeFrame.origin.x + 300, y: cubeFrame.origin.y), size: cubeFrame.size)
+        
+        UIView.animate(withDuration: 0.4, delay:0.2) { [self] in
             leftCubeView.alpha = 1
+            leftCubeView.frame = cubeFrame
             messageBgView.isHidden = false
-            messageBgView.frame = currentFrame
-            messageBgView.transform = CGAffineTransformIdentity
-        } completion: { [self] finished in
-            messageLabel.snp.makeConstraints { make in
-                make.width.equalTo(messageLabel.frame.size.width)
-            }
-            messageLabel.text = " "
-            messageLabel.isHidden = false
-            messageIndex = 1
+            messageBgView.frame = messageBgFrame
         }
-    }
-    
-    private func messageCharacterAnimation() {
-        if animateMessageString.count < viewModel.message!.count {
-            let nextCharactor  = (viewModel.message! as NSString).substring(with: NSMakeRange(animateMessageString.count, 1))
-            animateMessageString.append(nextCharactor)
-            let attributeStr = NSMutableAttributedString(string: animateMessageString)
-            let transform = CGAffineTransform(rotationAngle: -CGFloat(Double.pi/180*2))
-            let fontDescriptor = UIFontDescriptor(name: "Montserrat-Regular", matrix: transform)
-            let font = UIFont(descriptor: fontDescriptor, size: 16)
-            attributeStr.addAttributes([.font:font,.foregroundColor:viewModel.titleColor as Any], range: NSRange(location: 0, length: attributeStr.length))
-            messageLabel.attributedText = attributeStr
+        
+        UIView.animate(withDuration: 0.4, delay:0.4) { [self] in
+            messageLabel.isHidden = false
+            messageLabel.frame = messageLabelFrame
         }
     }
     
@@ -296,18 +253,6 @@ class VPFollowReadingResultView: UIView {
         UIView.animate(withDuration: 0.4) { [self] in
             rightLineCubeView.isHidden = false
             rightLineCubeView.frame = currentFrame
-        } completion: { isFinished in
-            if isFinished {
-                let basicAnimation = CABasicAnimation()
-                basicAnimation.keyPath = "opacity"
-                basicAnimation.fromValue = 0
-                basicAnimation.toValue = 1
-                basicAnimation.duration = 0.8
-                basicAnimation.repeatCount = 1
-                basicAnimation.autoreverses = true
-                basicAnimation.isRemovedOnCompletion = false
-                self.rightLineCubeView.layer.add(basicAnimation, forKey: nil)
-            }
         }
     }
 }

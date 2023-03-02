@@ -38,4 +38,8 @@ public extension UIFont {
     font(ofName: "Montserrat-SemiBoldItalic", ofSize: fontSize)
   }
 
+    static func montserratExtraBoldItalicFont(ofSize fontSize: CGFloat) -> UIFont {
+      font(ofName: "Montserrat-ExtraBoldItalic", ofSize: fontSize)
+    }
+    
 }

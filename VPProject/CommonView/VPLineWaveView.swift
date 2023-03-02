@@ -12,15 +12,50 @@ import UIColor_Hex_Swift
 class VPLineWaveView: UIView {
 
     /// 波纹振幅
-    public var amplitude:Double = 0
+    public var amplitude:Double = 0 {
+        didSet {
+            let selfWidth = bounds.size.width, selfHeight = bounds.size.height
+            let line1AnimatePath = UIBezierPath.init()
+            line1ControlPoint1.y = selfHeight/2 - amplitude
+            line1ControlPoint2.y = selfHeight/2 + amplitude
+            line1AnimatePath.move(to: CGPoint(x: 10, y: selfHeight/2))
+            line1AnimatePath.addCurve(to: CGPoint(x: selfWidth - 10, y: selfHeight/2), controlPoint1: line1ControlPoint1, controlPoint2: line1ControlPoint2)
+            line1ShapeLayer.path = line1AnimatePath.cgPath
+            pathAnimation.fromValue = line1Path.cgPath
+            pathAnimation.toValue = line1AnimatePath.cgPath
+            line1ShapeLayer.add(pathAnimation, forKey: nil)
+            line1Path = line1AnimatePath
+            
+            let line2AnimatePath = UIBezierPath.init()
+            line2ControlPoint1.y = selfHeight/2 - amplitude/3
+            line2ControlPoint2.y = selfHeight/2 + amplitude/3
+            line2AnimatePath.move(to: CGPoint(x: -20, y: selfHeight/2))
+            line2AnimatePath.addCurve(to: CGPoint(x: selfWidth + 20, y: selfHeight/2), controlPoint1: line2ControlPoint1, controlPoint2: line2ControlPoint2)
+            line2ShapeLayer.path = line2AnimatePath.cgPath
+            pathAnimation.fromValue = line2Path
+            pathAnimation.toValue = line2AnimatePath
+            line2ShapeLayer.removeAllAnimations()
+            line2GradientLayer.add(pathAnimation, forKey: nil)
+            line2Path = line2AnimatePath
+
+            let line3AnimatePath = UIBezierPath.init()
+            line3ControlPoint1.y = selfHeight/2 + amplitude
+            line3ControlPoint2.y = selfHeight/2 - amplitude
+            line3AnimatePath.move(to: CGPoint(x: -40, y: selfHeight/2))
+            line3AnimatePath.addCurve(to: CGPoint(x: selfWidth + 40, y: selfHeight/2), controlPoint1: line3ControlPoint1, controlPoint2: line3ControlPoint2)
+            line3ShapeLayer.path = line3AnimatePath.cgPath
+            pathAnimation.fromValue = line3Path
+            pathAnimation.toValue = line3AnimatePath
+            line3ShapeLayer.removeAllAnimations()
+            line3GradientLayer.add(pathAnimation, forKey: nil)
+            line3Path = line3AnimatePath
+        }
+    }
   
     // 用来记录偏移的距离
-    private var line1distance:Double = 0
-    // 是否反转 当偏移量超过振幅 需要进行反转
-    private var isLine1Transform:Bool = false
     private var line1ControlPoint1 = CGPoint(x: 0, y: 0)
     private var line1ControlPoint2 = CGPoint(x: 0, y: 0)
-    private let line1Path:UIBezierPath = UIBezierPath.init()
+    private var line1Path:UIBezierPath = UIBezierPath.init()
     private let line1ShapeLayer:CAShapeLayer = {
         let shapeLayer = CAShapeLayer.init()
         shapeLayer.strokeColor = UIColor.red.cgColor
@@ -36,11 +71,9 @@ class VPLineWaveView: UIView {
         return gradientLayer
     }()
     
-    private var line2distance:Double = 0
-    private var isLine2Transform:Bool = false
     private var line2ControlPoint1 = CGPoint(x: 0, y: 0)
     private var line2ControlPoint2 = CGPoint(x: 0, y: 0)
-    private let line2Path:UIBezierPath = UIBezierPath.init()
+    private var line2Path:UIBezierPath = UIBezierPath.init()
     private let line2ShapeLayer:CAShapeLayer = {
         let shapeLayer = CAShapeLayer.init()
         shapeLayer.strokeColor = UIColor.white.cgColor
@@ -56,11 +89,9 @@ class VPLineWaveView: UIView {
         return gradientLayer
     }()
     
-    private var line3distance:Double = 0
-    private var isLine3Transform:Bool = true
     private var line3ControlPoint1 = CGPoint(x: 0, y: 0)
     private var line3ControlPoint2 = CGPoint(x: 0, y: 0)
-    private let line3Path:UIBezierPath = UIBezierPath.init()
+    private var line3Path:UIBezierPath = UIBezierPath.init()
     private let line3ShapeLayer:CAShapeLayer = {
         let shapeLayer = CAShapeLayer.init()
         shapeLayer.strokeColor = UIColor.white.cgColor
@@ -76,39 +107,22 @@ class VPLineWaveView: UIView {
         return gradientLayer
     }()
     
-    private var displayLink:CADisplayLink?
-
+    private let pathAnimation:CABasicAnimation = {
+        let basicAnimation = CABasicAnimation(keyPath: "path")
+        basicAnimation.isRemovedOnCompletion = false
+        basicAnimation.duration = 0.1
+        return basicAnimation
+    }()
+    
     //MARK: —— View life cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         clipsToBounds = true
         
-        displayLink = CADisplayLink.init(target: self, selector: #selector(displayLinkAction))
-        if #available(iOS 15.0, *) {
-            displayLink?.preferredFrameRateRange = CAFrameRateRange(minimum: 30, maximum: 30, __preferred: 30)
-        } else {
-            displayLink?.preferredFramesPerSecond = 30
-        }
-        displayLink?.isPaused = true
-        displayLink?.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
-        
         layer.addSublayer(line1GradientLayer)
-        
-        line2distance = 20
         layer.addSublayer(line2GradientLayer)
-        
-        line3distance = -10
         layer.addSublayer(line3GradientLayer)
-    }
-    
-    override func willMove(toWindow newWindow: UIWindow?) {
-        super.willMove(toWindow: newWindow)
-        if newWindow == nil {
-            enableWaveAnimation(enable: false)
-        } else {
-            enableWaveAnimation(enable: true)
-        }
     }
         
     required init?(coder: NSCoder) {
@@ -133,6 +147,8 @@ class VPLineWaveView: UIView {
         line3ControlPoint2.x = selfWidth/4*3
         line3GradientLayer.frame = bounds
         line3GradientLayer.mask = line3ShapeLayer
+
+        lineWaveAnimation()
     }
     
     deinit {
@@ -140,82 +156,28 @@ class VPLineWaveView: UIView {
     }
     
     //MARK: —— Action
-    @objc private func displayLinkAction() {
+    private func lineWaveAnimation() {
         let selfWidth = bounds.size.width, selfHeight = bounds.size.height
         //线条1运动控制
-        if line1distance > amplitude || line1distance < -amplitude{
-            isLine1Transform = !isLine1Transform
-        }
-        if isLine1Transform {
-            if line1distance > amplitude {
-                line1distance = amplitude
-            }
-            line1distance += 1
-        } else {
-            if line1distance < -amplitude {
-                line1distance = amplitude
-            }
-            line1distance -= 1
-        }
-        
-        line1ControlPoint1.y = selfHeight/2 - line1distance
-        line1ControlPoint2.y = selfHeight/2 + line1distance
+        line1ControlPoint1.y = selfHeight/2 - amplitude
+        line1ControlPoint2.y = selfHeight/2 + amplitude
         line1Path.removeAllPoints()
-        line1Path.move(to: CGPoint(x: -10, y: selfHeight/2))
-        line1Path.addCurve(to: CGPoint(x: selfWidth + 10, y: selfHeight/2), controlPoint1: line1ControlPoint1, controlPoint2: line1ControlPoint2)
+        line1Path.move(to: CGPoint(x: 10, y: selfHeight/2))
+        line1Path.addCurve(to: CGPoint(x: selfWidth - 10, y: selfHeight/2), controlPoint1: line1ControlPoint1, controlPoint2: line1ControlPoint2)
         line1ShapeLayer.path = line1Path.cgPath
-        
         //线条2运动控制
-        if line2distance > amplitude || line2distance < -amplitude{
-            isLine2Transform = !isLine2Transform
-        }
-        if isLine2Transform {
-            if line2distance > amplitude {
-                line2distance = amplitude
-            }
-            line2distance += 1
-        } else {
-            if line2distance < -amplitude {
-                line2distance = amplitude
-            }
-            line2distance -= 1
-        }
-        line2ControlPoint1.y = selfHeight/2 - line2distance
-        line2ControlPoint2.y = selfHeight/2 + line2distance
+        line2ControlPoint1.y = selfHeight/2 - amplitude/2
+        line2ControlPoint2.y = selfHeight/2 + amplitude/2
         line2Path.removeAllPoints()
         line2Path.move(to: CGPoint(x: -20, y: selfHeight/2))
         line2Path.addCurve(to: CGPoint(x: selfWidth + 20, y: selfHeight/2), controlPoint1: line2ControlPoint1, controlPoint2: line2ControlPoint2)
         line2ShapeLayer.path = line2Path.cgPath
-        
         //线条3运动控制
-        if line3distance > amplitude || line3distance < -amplitude{
-            isLine3Transform = !isLine3Transform
-        }
-        if isLine3Transform {
-            if line3distance > amplitude {
-                line3distance = amplitude
-            }
-            line3distance += 1
-        } else {
-            if line3distance < -amplitude {
-                line3distance = amplitude
-            }
-            line3distance -= 1
-        }
-        line3ControlPoint1.y = selfHeight/2 - line3distance
-        line3ControlPoint2.y = selfHeight/2 + line3distance
+        line3ControlPoint1.y = selfHeight/2 + amplitude
+        line3ControlPoint2.y = selfHeight/2 - amplitude
         line3Path.removeAllPoints()
-        line3Path.move(to: CGPoint(x: -30, y: selfHeight/2))
-        line3Path.addCurve(to: CGPoint(x: selfWidth + 30, y: selfHeight/2), controlPoint1: line3ControlPoint1, controlPoint2: line3ControlPoint2)
+        line3Path.move(to: CGPoint(x: -40, y: selfHeight/2))
+        line3Path.addCurve(to: CGPoint(x: selfWidth + 40, y: selfHeight/2), controlPoint1: line3ControlPoint1, controlPoint2: line3ControlPoint2)
         line3ShapeLayer.path = line3Path.cgPath
-    }
-    
-    //MARK: —— Public method
-    func enableWaveAnimation(enable:Bool) {
-        displayLink?.isPaused = !enable
-    }
-    
-    func invalidateDisplayLink() {
-        displayLink?.invalidate()
     }
 }

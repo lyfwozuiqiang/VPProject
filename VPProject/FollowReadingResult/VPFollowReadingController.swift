@@ -16,7 +16,6 @@ class VPFollowReadingController: UIViewController {
         button.frame = CGRect(x: 100, y: 100, width: 50, height: 50)
         button.addTarget(self, action: #selector(buttonClick), for: .touchUpInside)
         view.addSubview(button)
-
     }
     
     @objc func buttonClick() {
