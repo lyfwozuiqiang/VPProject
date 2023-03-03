@@ -378,7 +378,7 @@ class VPLearningReportView: UIView {
         let seconds = model.learningDuration ?? 0
         let minute = ceil(Double(seconds)/60.0)
         let attributeStr = NSMutableAttributedString(string: "\(Int(minute))min")
-        attributeStr.addAttributes([.font:UIFont.montserratRegularFont(ofSize: 22)], range: NSMakeRange(0, attributeStr.length - 3))
+        attributeStr.addAttributes([.font:UIFont.montserratSemiBoldFont(ofSize: 22)], range: NSMakeRange(0, attributeStr.length - 3))
         attributeStr.addAttributes([.font:UIFont.pingFangSCRFont(ofSize: 12)], range: NSMakeRange(attributeStr.length - 3, 3))
         timeDesLabel.attributedText = attributeStr
         reportScrollView.addSubview(timeDesLabel)
@@ -390,7 +390,7 @@ class VPLearningReportView: UIView {
         
         if model.accuracy != nil {
             let attributeStr = NSMutableAttributedString(string: model.accuracy!)
-            attributeStr.addAttributes([.font:UIFont.montserratRegularFont(ofSize: 22)], range: NSMakeRange(0, attributeStr.length - 1))
+            attributeStr.addAttributes([.font:UIFont.montserratSemiBoldFont(ofSize: 22)], range: NSMakeRange(0, attributeStr.length - 1))
             attributeStr.addAttributes([.font:UIFont.pingFangSCRFont(ofSize: 12)], range: NSMakeRange(attributeStr.length - 1, 1))
             pronounceDesLabel.attributedText = attributeStr
         }
@@ -403,7 +403,7 @@ class VPLearningReportView: UIView {
         
         if model.fluency != nil {
             let attributeStr = NSMutableAttributedString(string: model.fluency!)
-            attributeStr.addAttributes([.font:UIFont.montserratRegularFont(ofSize: 22)], range: NSMakeRange(0, attributeStr.length - 1))
+            attributeStr.addAttributes([.font:UIFont.montserratSemiBoldFont(ofSize: 22)], range: NSMakeRange(0, attributeStr.length - 1))
             attributeStr.addAttributes([.font:UIFont.pingFangSCRFont(ofSize: 12)], range: NSMakeRange(attributeStr.length - 1, 1))
             fluencyDesLabel.attributedText = attributeStr
         }
@@ -557,18 +557,18 @@ class VPLearningReportView: UIView {
             make.top.equalTo(contentView.snp.top).offset(5)
             make.left.equalTo(contentView.snp.left)
             make.right.equalTo(contentView.snp.right)
-            make.bottom.equalTo(contentView.snp.bottom)
         }
         
         let leftIndicator = UIImageView.init(image: UIImage(named: "learn_report_indicator_icon"))
         contentView.addSubview(leftIndicator)
         leftIndicator.snp.makeConstraints { make in
             make.height.equalTo(2)
+            make.width.equalTo(53)
             make.top.equalTo(borderView.snp.bottom).offset(3)
             make.left.equalTo(contentView.snp.left)
             make.bottom.equalTo(contentView.snp.bottom)
         }
-        
+
         let titleLabel = UILabel.init()
         contentView.addSubview(titleLabel)
         titleLabel.numberOfLines = 0

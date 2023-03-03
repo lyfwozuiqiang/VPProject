@@ -28,9 +28,7 @@ class VPLineWaveController: UIViewController {
             make.height.equalTo(100)
         })
         self.lineWaveView?.amplitude = 0
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-            self.excuteLineAnimation()
-        })
+        self.excuteLineAnimation()
     }
     
     func excuteLineAnimation() {

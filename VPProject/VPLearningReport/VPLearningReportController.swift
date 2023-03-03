@@ -16,7 +16,7 @@ class VPLearningReportController: UIViewController {
         
         let greatSen = [SceneCourseSentence.init(sentenceID: nil, content: "It’s not very spacious.It’s not very spacious 111 1111 1111. It’s not very spacious.It’s not very spacious 111 1111 1111."),SceneCourseSentence.init(sentenceID: nil, content: "It’s not very spacious.It’s not very spacious. 1111 ")]
         let improveSec = [SceneCourseSentence.init(sentenceID: nil, content: "It’s not very spacious.It’s not very spacious."),SceneCourseSentence.init(sentenceID: nil, content: "It’s not very spacious.It’s not very spacious.")]
-        let summary = SceneCourseStudySummary(partId: 10, partName: nil, learningDays: 1, accuracy: "40%", fluency: "60%", learningDuration: 200, coinNum: 100, greatSentence: greatSen, needImprovedSentence: improveSec)
+        let summary = SceneCourseStudySummary(partId: 10, partName: nil, learningDays: 1, accuracy: "40%", fluency: "60%", learningDuration: 900, coinNum: 100, greatSentence: greatSen, needImprovedSentence: improveSec)
         let reportView = VPLearningReportView.init(with: summary)
         reportView.quitHandler = {
             print("quitHandler")
