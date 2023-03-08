@@ -59,7 +59,7 @@ class VPSelectLanguageController: UIViewController,UITableViewDataSource,UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if languageArray[indexPath.row].isSelected == true { return }
+        if languageArray[indexPath.row].isSelected { return }
         for index in 0..<languageArray.count {
             var model = languageArray[index]
             if index == indexPath.row {

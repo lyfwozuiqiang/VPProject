@@ -56,6 +56,7 @@ class VPLoginController: UIViewController,UITextFieldDelegate {
     private let passwordTextField:UITextField = {
         let textField = UITextField.init()
         textField.textColor = .white
+        textField.isSecureTextEntry = true
         textField.tintColor = UIColor(hex6: 0x69E4F6)
         textField.font = UIFont.montserratRegularFont(ofSize: 16)
         let attributeString:NSAttributedString = NSAttributedString(string: "Password",attributes: [.font:UIFont.montserratRegularFont(ofSize: 16),.foregroundColor:UIColor.init(hex6: 0x8598FF)])
@@ -130,6 +131,19 @@ class VPLoginController: UIViewController,UITextFieldDelegate {
     // 返回按钮点击事件
     @objc private func backButtonClick() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    // 返回按钮点击事件
+    @objc private func safeInputButtonClick(button:UIButton) {
+        button.isSelected = !button.isSelected
+        let image:UIImage?
+        if button.isSelected {
+            image = UIImage(named: "login_safe_input_close_icon")
+        } else {
+            image = UIImage(named: "login_safe_input_open_icon")
+        }
+        button.setImage(image, for: .normal)
+        passwordTextField.isSecureTextEntry = !button.isSelected
     }
     
     // 注册按钮点击事件
@@ -278,9 +292,20 @@ class VPLoginController: UIViewController,UITextFieldDelegate {
         view.addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
             make.left.equalTo(accountIconImageView.snp.right).offset(12)
-            make.right.equalTo(passwordBgView.snp.right).offset(-12)
             make.centerY.equalTo(passwordBgView)
             make.height.equalTo(44)
+        }
+        
+        // 添加密码输入切换
+        let safeInputButton = UIButton.init(type: .custom)
+        safeInputButton.setImage(UIImage(named: "login_safe_input_open_icon"), for: .normal)
+        safeInputButton.addTarget(self, action: #selector(safeInputButtonClick), for: .touchUpInside)
+        view.addSubview(safeInputButton)
+        safeInputButton.snp.makeConstraints { make in
+            make.size.equalTo(44)
+            make.left.equalTo(passwordTextField.snp.right).offset(8)
+            make.right.equalTo(passwordBgView.snp.right)
+            make.centerY.equalTo(passwordBgView.snp.centerY)
         }
         
         let centerView:UIView = UIView.init()
