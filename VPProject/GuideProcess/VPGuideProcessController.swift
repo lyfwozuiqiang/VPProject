@@ -368,8 +368,8 @@ class VPGuideProcessController: UIViewController {
     // 睁眼闭眼透明度动画
     private func shadowOpacityAnimation(fromValue:Any, toValue:Any) -> CABasicAnimation{
         let basicAnimation = CABasicAnimation(keyPath: "shadowOpacity")
-        basicAnimation.fromValue = 1
-        basicAnimation.toValue = 1
+        basicAnimation.fromValue = fromValue
+        basicAnimation.toValue = toValue
         return basicAnimation
     }
     
