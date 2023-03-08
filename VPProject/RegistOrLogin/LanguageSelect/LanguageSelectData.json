@@ -1,0 +1,20 @@
+{
+    "code": 200,
+    "msg": null,
+    "localMsg": null,
+    "data": [
+        {
+            "langCode": "zh-cn",
+            "countryFlag": "https://www.baidu.com/china.png",
+            "localLanguage": "简体中文"
+        },{
+            "langCode": "vi-vn",
+            "countryFlag": "https://www.baidu.com/vivn.png",
+            "localLanguage": "Tiếng Việt"
+        },{
+            "langCode": "ko-kr",
+            "countryFlag": "https://www.baidu.com/kr.png",
+            "localLanguage": "한국어"
+        }
+    ]
+}

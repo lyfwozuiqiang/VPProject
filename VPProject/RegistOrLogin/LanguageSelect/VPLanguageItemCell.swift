@@ -7,25 +7,23 @@
 
 import UIKit
 
-struct LanguageModel {
-    let flag:String
-    let language:String
-    var isSelected:Bool
-}
+import Kingfisher
 
 class VPLanguageItemCell: UITableViewCell {
     
-    var languageModel:LanguageModel = LanguageModel(flag: "", language: "", isSelected: false) {
+    var languageInfo:LanguageInfo = LanguageInfo(langCode: "", countryFlag: "", localLanguage: "") {
         didSet {
-            flagImageView.image = UIImage(named: languageModel.flag)
-            countryLabel.text = languageModel.language
-            indicatorImageView.isHidden = !languageModel.isSelected
+            let url:URL? = URL(string: languageInfo.countryFlag ?? "")
+            flagImageView.kf.setImage(with: url)
+            countryLabel.text = languageInfo.localLanguage
+            indicatorImageView.isHidden = !languageInfo.isSelected
         }
     }
     
     // 国旗
     private let flagImageView:UIImageView = {
         let imageView = UIImageView.init()
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     

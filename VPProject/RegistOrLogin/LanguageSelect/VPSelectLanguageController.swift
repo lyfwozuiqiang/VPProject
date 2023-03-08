@@ -18,11 +18,7 @@ class VPSelectLanguageController: UIViewController,UITableViewDataSource,UITable
         return tableView
     }()
     
-    private var languageArray:Array<LanguageModel> = [
-        LanguageModel(flag: "select_language_vietnam_flag_icon", language: "Tiếng Việt", isSelected: true),
-        LanguageModel(flag: "select_language_japanese_flag_icon", language: "日本", isSelected: false),
-        LanguageModel(flag: "select_language_korea_flag_icon", language: "한국인", isSelected: false),
-        LanguageModel(flag: "select_language_chinese_flag_icon", language: "中文繁體", isSelected: false)]
+    private var languageArray:Array<LanguageInfo> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +26,36 @@ class VPSelectLanguageController: UIViewController,UITableViewDataSource,UITable
         view.backgroundColor = .white
         // 布局用户页面
         layoutUserInterface()
+        // 获取并处理语言选项
+        getLanguagesData()
+    }
+    
+    // MARK: —— Network
+    private func getLanguageResponse() async -> LangeuageResponse? {
+        let bundleFilePath = Bundle.main.path(forResource: "LanguageSelectData", ofType: "json")
+        guard let filePath = bundleFilePath else {
+            return nil
+        }
+        let fileUrl = NSURL(fileURLWithPath: filePath)
+        if let jsonData = try? Data(contentsOf: fileUrl as URL) {
+            let languageInfo = try? JSONDecoder().decode(LangeuageResponse.self, from: jsonData)
+            return languageInfo
+        } else {
+            return nil
+        }
+    }
+    
+    private func getLanguagesData() {
+        Task {
+            let response = await getLanguageResponse()
+            languageArray = response?.data ?? []
+            if languageArray.count > 0 {
+                var firstLanguageInfo = languageArray.first
+                firstLanguageInfo?.isSelected = true
+                languageArray[0] = firstLanguageInfo!
+            }
+            languageTableView.reloadData()
+        }
     }
     
     // MARK: —— Action
@@ -49,7 +75,7 @@ class VPSelectLanguageController: UIViewController,UITableViewDataSource,UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VPLanguageItemCell") as! VPLanguageItemCell
-        cell.languageModel = languageArray[indexPath.row]
+        cell.languageInfo = languageArray[indexPath.row]
         return cell
     }
     

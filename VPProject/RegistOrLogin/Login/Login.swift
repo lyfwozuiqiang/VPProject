@@ -15,6 +15,7 @@ public struct LanguageInfo: Decodable {
     public let langCode: String?     // 语言码
     public let countryFlag: String?   // 国旗
     public let localLanguage: String? // 语言描述（本地语言）
+    public var isSelected:Bool = false
     
     enum CodingKeys: String, CodingKey {
         case langCode
@@ -22,6 +23,13 @@ public struct LanguageInfo: Decodable {
         case localLanguage
     }
     
+}
+
+public struct LangeuageResponse:Decodable {
+    let code:Int?
+    let msg:String?
+    let localMsg:String?
+    let data:[LanguageInfo]?
 }
 
 // MARK: 获取注册的问卷、欢迎语
