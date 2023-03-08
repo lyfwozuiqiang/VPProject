@@ -217,9 +217,9 @@
 			isa = PBXGroup;
 			children = (
 				0163A48029B33B07007DB7C4 /* VPGuideProcessController.swift */,
+				01610F5129B7878E0016D4F5 /* VPIdentitySelectController.swift */,
 				0163A48229B46189007DB7C4 /* VPIdentitySelectView.swift */,
 				0163A48429B46673007DB7C4 /* VPIdentityView.swift */,
-				01610F5129B7878E0016D4F5 /* VPIdentitySelectController.swift */,
 			);
 			path = GuideProcess;
 			sourceTree = "<group>";

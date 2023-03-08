@@ -89,6 +89,12 @@ class VPIdentityView: UIView {
         label.font = UIFont.montserratRegularFont(ofSize: 14)
         return label
     }()
+    
+    private let genderImageView:UIImageView = {
+        let imageView = UIImageView.init()
+        imageView.image = UIImage(named: "guide_female_icon")
+        return imageView
+    }()
         
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -177,6 +183,13 @@ class VPIdentityView: UIView {
             make.left.equalTo(backgroundImageView).offset(32)
             make.right.equalTo(backgroundImageView.snp.right).offset(-32)
             make.top.equalTo(learnTimeLabel.snp.bottom).offset(4)
+        }
+        
+        addSubview(genderImageView)
+        genderImageView.snp.makeConstraints { make in
+            make.left.equalTo(backgroundImageView.snp.left).offset(32)
+            make.top.equalTo(learnTimeDesLabel.snp.bottom).offset(22)
+            make.size.equalTo(20)
         }
     }
 }
