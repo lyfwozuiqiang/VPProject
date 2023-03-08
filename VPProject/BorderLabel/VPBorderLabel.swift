@@ -39,7 +39,7 @@ class VPBorderLabel: UILabel {
         return layer
     }()
     
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -55,7 +55,7 @@ class VPBorderLabel: UILabel {
         updateBorder()
     }
     
-    //MARK: —— Public method
+    // MARK: —— Public method
     ///更新贝塞尔曲线视图
     func updateBorder() {
         if isShowBorder {
@@ -81,7 +81,7 @@ class VPBorderLabel: UILabel {
         }
     }
     
-    //MARK: —— Private method
+    // MARK: —— Private method
     //隐藏边框
     private func hideBorder() {
         borderShapeLayer.removeFromSuperlayer()
@@ -91,9 +91,10 @@ class VPBorderLabel: UILabel {
     func addBezierPathOriginPoints() {
         borderBezierPath.move(to: CGPoint(x: 46, y: 46))
         let radius = sqrt(pow(kRectangleLength, 2) * 2)/2
-        borderBezierPath.addQuadCurve(to: CGPointMake(kRectangleLength/2, kRectangleLength/2 + radius), controlPoint: CGPointMake(kRectangleLength/3*2, kRectangleLength/2 + radius))
-        borderBezierPath.addArc(withCenter: CGPointMake(kRectangleLength/2, kRectangleLength/2), radius: radius, startAngle: .pi/2, endAngle: 0.3 * .pi, clockwise: true)
+        borderBezierPath.addQuadCurve(to:CGPoint(x: kRectangleLength/2, y: kRectangleLength/2 + radius), controlPoint:CGPoint(x: kRectangleLength/3*2, y: kRectangleLength/2 + radius))
+        
+        borderBezierPath.addArc(withCenter:CGPoint(x: kRectangleLength/2, y: kRectangleLength/2), radius: radius, startAngle: .pi/2, endAngle: 0.3 * .pi, clockwise: true)
         let currentPoint = borderBezierPath.currentPoint
-        borderBezierPath.addQuadCurve(to: CGPointMake(kRectangleLength/2, currentPoint.y), controlPoint: CGPointMake(kRectangleLength/4*3, kRectangleLength/2 + radius))
+        borderBezierPath.addQuadCurve(to:CGPoint(x: kRectangleLength/2, y: currentPoint.y), controlPoint:CGPoint(x: kRectangleLength/4*3, y: kRectangleLength/2 + radius))
     }
 }

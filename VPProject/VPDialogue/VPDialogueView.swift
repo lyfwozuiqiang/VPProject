@@ -53,7 +53,7 @@ class VPDialogueView: UIView,UITableViewDataSource,UITableViewDelegate {
         return tableView
     }()
     
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -86,7 +86,7 @@ class VPDialogueView: UIView,UITableViewDataSource,UITableViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: —— UITableViewDataSource
+    // MARK: —— UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
         return dialogueArray.count
     }
@@ -107,7 +107,7 @@ class VPDialogueView: UIView,UITableViewDataSource,UITableViewDelegate {
         }
     }
     
-    //MARK: —— UITableViewDelegate
+    // MARK: —— UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("indexPath,indexPath",indexPath,indexPath)
     }

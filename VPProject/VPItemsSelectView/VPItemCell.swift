@@ -37,14 +37,14 @@ class VPItemCell: UITableViewCell {
         return label
     }()
     
-    //MARK: —— Override
+    // MARK: —— Override
     override var isSelected: Bool {
         didSet {
             gradientView.isHidden = !isSelected
         }
     }
     
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
        

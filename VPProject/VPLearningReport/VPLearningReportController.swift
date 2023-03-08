@@ -16,7 +16,7 @@ class VPLearningReportController: UIViewController {
         
         let greatSen = [SceneCourseSentence.init(sentenceID: nil, content: "It’s not very spacious.It’s not very spacious 111 1111 1111. It’s not very spacious.It’s not very spacious 111 1111 1111."),SceneCourseSentence.init(sentenceID: nil, content: "It’s not very spacious.It’s not very spacious. 1111 ")]
         let improveSec = [SceneCourseSentence.init(sentenceID: nil, content: "It’s not very spacious.It’s not very spacious."),SceneCourseSentence.init(sentenceID: nil, content: "It’s not very spacious.It’s not very spacious.")]
-        let summary = SceneCourseStudySummary(partId: 10, partName: nil, learningDays: 1, accuracy: "40%", fluency: "60%", learningDuration: 900, coinNum: 100, greatSentence: greatSen, needImprovedSentence: improveSec)
+        let summary = SceneCourseStudySummary(partId: 10, partName: nil, learningDays: nil, accuracy: nil, fluency: nil, learningDuration: nil, coinNum: nil, greatSentence: nil, needImprovedSentence: nil)
         let reportView = VPLearningReportView.init(with: summary)
         reportView.quitHandler = {
             print("quitHandler")
@@ -29,5 +29,15 @@ class VPLearningReportController: UIViewController {
             make.left.right.bottom.equalToSuperview()
             make.top.equalTo(view.snp.topMargin)
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            let summary = SceneCourseStudySummary(partId: 10, partName: nil, learningDays: 22, accuracy: "200%", fluency: "20%", learningDuration: 500, coinNum: 33, greatSentence: greatSen, needImprovedSentence: improveSec)
+            reportView.dataModel = summary
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                let data = SceneCourseStudySummary(partId: 10, partName: nil, learningDays: nil, accuracy: nil, fluency: nil, learningDuration: nil, coinNum: nil, greatSentence: nil, needImprovedSentence: nil)
+                reportView.dataModel = data
+            })
+        })
     }
 }

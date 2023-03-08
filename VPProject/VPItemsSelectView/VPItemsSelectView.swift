@@ -69,7 +69,7 @@ class VPItemsSelectView: UIView,UITableViewDataSource,UITableViewDelegate {
         return button
     }()
     
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -107,7 +107,7 @@ class VPItemsSelectView: UIView,UITableViewDataSource,UITableViewDelegate {
         }
     }
     
-    //MARK: —— UITableViewDataSource
+    // MARK: —— UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemsArray.count
     }
@@ -119,7 +119,7 @@ class VPItemsSelectView: UIView,UITableViewDataSource,UITableViewDelegate {
         return cell
     }
     
-    //MARK: —— UITableViewDelegate
+    // MARK: —— UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         for index in 0..<itemSelectStatusArray.count {
             itemSelectStatusArray[index] = false
@@ -128,7 +128,7 @@ class VPItemsSelectView: UIView,UITableViewDataSource,UITableViewDelegate {
         tableView.reloadData()
     }
     
-    //MARK: —— Action
+    // MARK: —— Action
     @objc private func confirmButtonClick() {
         var resultIndex = -1
         for (index,value) in itemSelectStatusArray.enumerated() {
@@ -144,7 +144,7 @@ class VPItemsSelectView: UIView,UITableViewDataSource,UITableViewDelegate {
         }
     }
     
-    //MARK: —— Private method
+    // MARK: —— Private method
     private func addVisualEffectView() {
         let visualEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let visualEffectView = UIVisualEffectView.init(effect: visualEffect)

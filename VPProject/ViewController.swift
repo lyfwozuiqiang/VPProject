@@ -9,7 +9,11 @@ import UIKit
 
 class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
-    @IBOutlet private weak var listTableView: UITableView!
+    private let listTableView: UITableView = {
+        let tableView = UITableView.init()
+        tableView.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: "ListTableViewCell")
+        return tableView
+    }()
     
     private let listArray:Array = [
         ["title":"词卡错误划线","class":"VPBorderLabelController"],
@@ -24,10 +28,22 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        listTableView.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: "ListTableViewCell")
+        view.backgroundColor = UIColor.white
+        
+        listTableView.delegate = self
+        listTableView.dataSource = self
+        view.addSubview(listTableView)
+        listTableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
-    //MARK: —— UITableViewDataSource
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    // MARK: —— UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listArray.count
     }
@@ -38,7 +54,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         return listCell
     }
     
-    //MARK: —— UITableViewDelegate
+    // MARK: —— UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }

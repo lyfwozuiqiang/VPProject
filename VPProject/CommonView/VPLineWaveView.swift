@@ -114,7 +114,7 @@ class VPLineWaveView: UIView {
         return basicAnimation
     }()
     
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -155,7 +155,7 @@ class VPLineWaveView: UIView {
         print("VPLineWaveView deinit")
     }
     
-    //MARK: —— Action
+    // MARK: —— Action
     private func lineWaveAnimation() {
         let selfWidth = bounds.size.width, selfHeight = bounds.size.height
         //线条1运动控制

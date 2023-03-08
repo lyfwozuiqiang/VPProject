@@ -94,7 +94,7 @@ class VPPronounceView: UIView {
         return button
     }()
 
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     init(with pronounceModel:PronounceViewModel) {
         super.init(frame: CGRectZero)
         
@@ -237,7 +237,7 @@ class VPPronounceView: UIView {
 
     }
     
-    //MARK: —— Action
+    // MARK: —— Action
     @objc func viewTapHandle() {
         removeFromSuperview()
     }
@@ -246,7 +246,7 @@ class VPPronounceView: UIView {
         pronounceButtonClickHandler?(button.tag)
     }
     
-    //MARK: —— Pirvate method
+    // MARK: —— Pirvate method
     private func calculateLength(text:String?, maxWidth:CGFloat) -> CGFloat {
         if text == nil {
             return 0.0

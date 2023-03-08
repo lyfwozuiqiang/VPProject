@@ -76,7 +76,7 @@ class VPDialogueRightCell: UITableViewCell {
     // 边框宽度
     private let borderWidth:Double = 2
 
-    //MARK: —— View lift cycle
+    // MARK: —— View lift cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

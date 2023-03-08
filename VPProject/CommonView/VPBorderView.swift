@@ -77,7 +77,7 @@ class VPBorderView: UIView {
     /// 右侧上下边距
     var rightSpaces:(top:Double,bottom:Double) = (0,0)
 
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         

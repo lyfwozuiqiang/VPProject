@@ -36,7 +36,6 @@ class VPLineWaveController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [self] in
                 index += 1
                 let random = arc4random_uniform(120)
-                print(index,random)
                 self.lineWaveView?.amplitude = Double(random)
                 self.excuteLineAnimation()
             })

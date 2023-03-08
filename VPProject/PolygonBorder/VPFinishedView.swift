@@ -175,7 +175,7 @@ class VPFinishedView: UIView {
         return animation
     }()
     
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     init(level:LevelType) {
         super.init(frame: CGRectZero)
 
@@ -247,7 +247,7 @@ class VPFinishedView: UIView {
         print("VPFinishedView deinit")
     }
     
-    //MARK: —— Action
+    // MARK: —— Action
     @objc func countAction() {
         currentCount += Int64(seperateCount)
         if currentCount >= coinCount {
@@ -270,7 +270,7 @@ class VPFinishedView: UIView {
         }
     }
     
-    //MARK: —— Private method
+    // MARK: —— Private method
     private func addVisualEffectView() {
         let visualEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let visualEffectView = UIVisualEffectView.init(effect: visualEffect)

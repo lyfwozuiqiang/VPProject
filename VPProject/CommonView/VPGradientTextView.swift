@@ -12,6 +12,7 @@ class VPGradientTextView: UIView {
     var text:String? {
         didSet {
             textLabel.text = text
+            textLabel.updateConstraints()
         }
     }
     
@@ -54,7 +55,7 @@ class VPGradientTextView: UIView {
         return layer
     }()
     
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         textLabel.textAlignment = .center
@@ -68,9 +69,8 @@ class VPGradientTextView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
    
-    //MARK: —— Private method
+    // MARK: —— Private method
     override func layoutSubviews() {
         super.layoutSubviews()
         

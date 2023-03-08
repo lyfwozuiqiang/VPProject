@@ -92,7 +92,7 @@ class VPPolygonBorderView: UIView {
     var rightSpaces:(top:CGPoint,bottom:CGPoint) = (CGPointZero,CGPointZero)
     
 
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -107,7 +107,7 @@ class VPPolygonBorderView: UIView {
         updateBorder()
     }
     
-    //MARK: —— Private method
+    // MARK: —— Private method
     func updateBorder() {
         // 描绘渐变色边框
         let viewWidth:Double = bounds.size.width, viewHeight = bounds.size.height

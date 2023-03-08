@@ -123,7 +123,7 @@ class VPProgressView: UIView {
         return layer
     }()
     
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .clear

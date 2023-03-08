@@ -11,6 +11,12 @@ class VPLearningReportView: UIView {
     
     var quitHandler:(() -> Void)?
     var shareHandler:(() -> Void)?
+    var dataModel:SceneCourseStudySummary {
+        didSet {
+            updateUserInterface()
+            updateScrollViewContentSize()
+        }
+    }
     
     private let backgroundImageView:UIImageView = {
         let imageView = UIImageView.init(image: UIImage(named: "learn_report_background_image"))
@@ -30,6 +36,7 @@ class VPLearningReportView: UIView {
     private let reportScrollView:UIScrollView = {
         let scrollView = UIScrollView.init()
         scrollView.backgroundColor = .clear
+        scrollView.alwaysBounceVertical = true
         scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
@@ -223,15 +230,15 @@ class VPLearningReportView: UIView {
         return label
     }()
     
-    private let shareButton:UIButton = {
-        let button = UIButton.init()
-        button.setTitle("share", for: .normal)
-        button.backgroundColor = .green
+    private let shareButton:UICommonButton = {
+        let button = UICommonButton.init(style: .gradientPurple)
+        button.updateTitle("share")
         return button
     }()
     
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     init(with model:SceneCourseStudySummary) {
+        self.dataModel = model
         super.init(frame: CGRectZero)
         
         layer.addSublayer(gradientLayer)
@@ -289,7 +296,6 @@ class VPLearningReportView: UIView {
             make.size.equalTo(22)
         }
         
-        coinCountLabel.text = model.coinNum == nil ? "" : "+\(model.coinNum!)"
         reportScrollView.addSubview(coinCountLabel)
         coinCountLabel.snp.makeConstraints { make in
             make.left.equalTo(coinImageView.snp.right).offset(4)
@@ -311,7 +317,6 @@ class VPLearningReportView: UIView {
             make.centerY.equalTo(cubeImageView.snp.centerY)
         }
         
-        dayLabel.text = model.learningDays == nil ? "" : String(format: "DAY %02d", model.learningDays!)
         reportScrollView.addSubview(dayLabel)
         dayLabel.snp.makeConstraints { make in
             make.right.equalTo(self.snp.right).offset(-44)
@@ -375,25 +380,13 @@ class VPLearningReportView: UIView {
             make.centerX.equalTo(fluencyProgressView.snp.centerX)
         }
         
-        let seconds = model.learningDuration ?? 0
-        let minute = ceil(Double(seconds)/60.0)
-        let attributeStr = NSMutableAttributedString(string: "\(Int(minute))min")
-        attributeStr.addAttributes([.font:UIFont.montserratSemiBoldFont(ofSize: 22)], range: NSMakeRange(0, attributeStr.length - 3))
-        attributeStr.addAttributes([.font:UIFont.pingFangSCRFont(ofSize: 12)], range: NSMakeRange(attributeStr.length - 3, 3))
-        timeDesLabel.attributedText = attributeStr
         reportScrollView.addSubview(timeDesLabel)
         timeDesLabel.snp.makeConstraints { make in
             make.center.equalTo(timeProgressView.snp.center)
             make.left.equalTo(timeProgressView).offset(5)
             make.right.equalTo(timeProgressView.snp.right).offset(-5)
         }
-        
-        if model.accuracy != nil {
-            let attributeStr = NSMutableAttributedString(string: model.accuracy!)
-            attributeStr.addAttributes([.font:UIFont.montserratSemiBoldFont(ofSize: 22)], range: NSMakeRange(0, attributeStr.length - 1))
-            attributeStr.addAttributes([.font:UIFont.pingFangSCRFont(ofSize: 12)], range: NSMakeRange(attributeStr.length - 1, 1))
-            pronounceDesLabel.attributedText = attributeStr
-        }
+
         reportScrollView.addSubview(pronounceDesLabel)
         pronounceDesLabel.snp.makeConstraints { make in
             make.centerY.equalTo(pronounceProgressView.snp.centerY)
@@ -401,12 +394,6 @@ class VPLearningReportView: UIView {
             make.right.equalTo(pronounceProgressView.snp.right).offset(-5)
         }
         
-        if model.fluency != nil {
-            let attributeStr = NSMutableAttributedString(string: model.fluency!)
-            attributeStr.addAttributes([.font:UIFont.montserratSemiBoldFont(ofSize: 22)], range: NSMakeRange(0, attributeStr.length - 1))
-            attributeStr.addAttributes([.font:UIFont.pingFangSCRFont(ofSize: 12)], range: NSMakeRange(attributeStr.length - 1, 1))
-            fluencyDesLabel.attributedText = attributeStr
-        }
         reportScrollView.addSubview(fluencyDesLabel)
         fluencyDesLabel.snp.makeConstraints { make in
             make.center.equalTo(fluencyProgressView.snp.center)
@@ -434,10 +421,87 @@ class VPLearningReportView: UIView {
             make.centerY.equalTo(greatImageView.snp.centerY)
         }
         
+        updateUserInterface()
+        
+        shareButton.addTarget(self, action: #selector(shareButtonClick), for: .touchUpInside)
+        reportScrollView.addSubview(shareButton)
+        shareButton.snp.makeConstraints { make in
+            make.left.equalTo(reportScrollView.snp.left).offset(32)
+            make.right.equalTo(self.snp.right).offset(-32)
+            make.height.equalTo(48)
+            make.top.equalTo(conclutionImageView.snp.bottom).offset(26)
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        updateScrollViewContentSize()
+        gradientLayer.frame = bounds
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: —— Action
+    @objc private func quitButtonClick() {
+        quitHandler?()
+    }
+    
+    @objc private func shareButtonClick() {
+        shareHandler?()
+    }
+    
+    // MARK: —— Private method
+    private func updateUserInterface() {
+        for subView in reportScrollView.subviews {
+            if subView.tag == 2 {
+                subView.removeFromSuperview()
+            }
+        }
+        
+        coinCountLabel.text = dataModel.coinNum == nil ? "+0" : "+\(dataModel.coinNum!)"
+        coinCountLabel.snp.makeConstraints { make in
+            make.left.equalTo(coinImageView.snp.right).offset(4)
+            make.centerY.equalTo(reportCoinLabel.snp.centerY)
+            make.right.equalTo(dragonImageView.snp.left).priority(249)
+        }
+        
+        dayLabel.text = dataModel.learningDays == nil ? "DAY 0" : String(format: "DAY %02d", dataModel.learningDays!)
+        let seconds = dataModel.learningDuration ?? 0
+        let minute = ceil(Double(seconds)/60.0)
+        let learningAttributeStr = NSMutableAttributedString(string: "\(Int(minute))min")
+        learningAttributeStr.addAttributes([.font:UIFont.montserratSemiBoldFont(ofSize: 22)], range: NSMakeRange(0, learningAttributeStr.length - 3))
+        learningAttributeStr.addAttributes([.font:UIFont.pingFangSCRFont(ofSize: 12)], range: NSMakeRange(learningAttributeStr.length - 3, 3))
+        timeDesLabel.attributedText = learningAttributeStr
+        
+        let accuracyString:String
+        if dataModel.accuracy == nil {
+            accuracyString = "0%"
+        } else {
+            accuracyString = dataModel.accuracy!
+        }
+        let accuracyAttributeStr = NSMutableAttributedString(string: accuracyString)
+        accuracyAttributeStr.addAttributes([.font:UIFont.montserratSemiBoldFont(ofSize: 22)], range: NSMakeRange(0, accuracyAttributeStr.length - 1))
+        accuracyAttributeStr.addAttributes([.font:UIFont.pingFangSCRFont(ofSize: 12)], range: NSMakeRange(accuracyAttributeStr.length - 1, 1))
+        pronounceDesLabel.attributedText = accuracyAttributeStr
+        
+        let fluencyString:String
+        if dataModel.fluency == nil {
+            fluencyString = "0%"
+        } else {
+            fluencyString = dataModel.fluency!
+        }
+        let attributeStr = NSMutableAttributedString(string: fluencyString)
+        attributeStr.addAttributes([.font:UIFont.montserratSemiBoldFont(ofSize: 22)], range: NSMakeRange(0, attributeStr.length - 1))
+        attributeStr.addAttributes([.font:UIFont.pingFangSCRFont(ofSize: 12)], range: NSMakeRange(attributeStr.length - 1, 1))
+        fluencyDesLabel.attributedText = attributeStr
+        
         var greatPreviousView:UIView?
-        if model.greatSentence != nil {
-            for index in 0..<model.greatSentence!.count {
-                let title = model.greatSentence![index].content
+        if dataModel.greatSentence != nil {
+            for index in 0..<dataModel.greatSentence!.count {
+                let title = dataModel.greatSentence![index].content
                 if title != nil {
                     let view = conclusionItemView(title: title!)
                     reportScrollView.addSubview(view)
@@ -456,6 +520,7 @@ class VPLearningReportView: UIView {
         }
         
         reportScrollView.addSubview(improveImageView)
+        improveImageView.snp.removeConstraints()
         improveImageView.snp.makeConstraints { make in
             make.left.equalTo(conclutionImageView.snp.left).offset(30)
             if greatPreviousView != nil {
@@ -472,9 +537,9 @@ class VPLearningReportView: UIView {
         }
         
         var improvePreviousView:UIView?
-        if model.needImprovedSentence != nil {
-            for index in 0..<model.needImprovedSentence!.count {
-                let title = model.needImprovedSentence![index].content
+        if dataModel.needImprovedSentence != nil {
+            for index in 0..<dataModel.needImprovedSentence!.count {
+                let title = dataModel.needImprovedSentence![index].content
                 if title != nil {
                     let view = conclusionItemView(title: title!)
                     reportScrollView.addSubview(view)
@@ -492,49 +557,27 @@ class VPLearningReportView: UIView {
             }
         }
         
-        conclutionImageView.snp.makeConstraints { make in
+        conclutionImageView.snp.remakeConstraints { make in
             if improvePreviousView != nil {
                 make.bottom.equalTo(improvePreviousView!.snp.bottom).offset(60)
             } else {
                 make.bottom.equalTo(improveImageView.snp.bottom).offset(60)
             }
-        }
-        
-        shareButton.addTarget(self, action: #selector(shareButtonClick), for: .touchUpInside)
-        reportScrollView.addSubview(shareButton)
-        shareButton.snp.makeConstraints { make in
-            make.left.equalTo(reportScrollView.snp.left).offset(32)
-            make.right.equalTo(self.snp.right).offset(-32)
-            make.height.equalTo(48)
-            make.top.equalTo(conclutionImageView.snp.bottom).offset(26)
+            make.left.equalToSuperview().offset(12)
+            make.right.equalTo(self.snp.right).offset(-12)
+            make.top.equalTo(timeProgressView.snp.bottom).offset(15)
         }
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
+    private func updateScrollViewContentSize() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [self] in
             reportScrollView.contentSize = CGSize(width: UIScreen.main.bounds.size.width, height: CGRectGetMaxY(shareButton.frame))
         })
-        gradientLayer.frame = bounds
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    //MARK: —— Action
-    @objc private func quitButtonClick() {
-        quitHandler?()
-    }
-    
-    @objc private func shareButtonClick() {
-        shareHandler?()
-    }
-    
-    //MARK: —— Private method
     private func conclusionItemView(title:String) -> UIView {
         let contentView = UIView.init()
+        contentView.tag = 2
         let rightIndicator = UIImageView.init(image: UIImage(named: "learn_report_indicator_icon"))
         contentView.addSubview(rightIndicator)
         rightIndicator.snp.makeConstraints { make in

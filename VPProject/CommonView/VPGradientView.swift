@@ -74,7 +74,7 @@ class VPGradientView: UIView {
     }()
 
 
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     override init(frame: CGRect) {
         topLineViewHeightConstraint = topGradientView.heightAnchor.constraint(equalToConstant: gradientLineHeight)
         bottomLineViewHeightConstraint = bottomGradientView.heightAnchor.constraint(equalToConstant: gradientLineHeight)

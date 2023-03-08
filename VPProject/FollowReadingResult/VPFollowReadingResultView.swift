@@ -91,7 +91,7 @@ class VPFollowReadingResultView: UIView {
     private var animateTitleString:String = ""
     private var titleIndex:Int = 0
     
-    //MARK: —— View life cycle
+    // MARK: —— View life cycle
     init(with model:FollowReadingViewModel) {
         viewModel = model
         super.init(frame: CGRectZero)
@@ -163,7 +163,7 @@ class VPFollowReadingResultView: UIView {
         print("VPFollowReadingResultViewdeinit")
     }
     
-    //MARK: —— Action
+    // MARK: —— Action
     @objc func displayLinkAction() {
         if titleIndex > 300 {
             displayLink?.invalidate()
@@ -189,7 +189,7 @@ class VPFollowReadingResultView: UIView {
         }
     }
     
-    //MARK: —— Public method
+    // MARK: —— Public method
     func excuteAnimation() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [self] in
             titleAnimation()
@@ -208,7 +208,7 @@ class VPFollowReadingResultView: UIView {
     }
     
     
-    //MARK: —— Private method
+    // MARK: —— Private method
     private func titleAnimation() {
         let titleLabelFrame = titleLabel.frame
         titleLabel.frame = CGRect(origin: CGPoint(x: titleLabelFrame.origin.x + 300, y: titleLabelFrame.origin.y), size: titleLabelFrame.size)
