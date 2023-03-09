@@ -17,6 +17,14 @@ class VPLanguageItemCell: UITableViewCell {
             flagImageView.kf.setImage(with: url)
             countryLabel.text = languageInfo.localLanguage
             indicatorImageView.isHidden = !languageInfo.isSelected
+            
+            if languageInfo.isSelected {
+                borderBgView.borderWidth = 2
+                borderBgView.borderColors = [UIColor(hex6: 0x9875FF).cgColor,UIColor(hex6: 0x718BFF).cgColor]
+            } else {
+                borderBgView.borderWidth = 1
+                borderBgView.borderColors = [UIColor(hex6: 0x6A50B7).cgColor,UIColor(hex6: 0x566DD2).cgColor]
+            }
         }
     }
     

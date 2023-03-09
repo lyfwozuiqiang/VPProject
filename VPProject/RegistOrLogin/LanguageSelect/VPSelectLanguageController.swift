@@ -79,7 +79,8 @@ class VPSelectLanguageController: UIViewController,UITableViewDataSource,UITable
     }
     
     @objc private func nextButtonClick() {
-        print("VPSelectLanguageController nextButtonClick")
+        let registVc = VPRegistController.init()
+        navigationController?.pushViewController(registVc, animated: true)
     }
     
     // MARK: —— UITableViewDataSource
