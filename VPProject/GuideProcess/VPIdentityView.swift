@@ -9,6 +9,23 @@ import UIKit
 
 class VPIdentityView: UIView {
     
+    var identityInfo:ScenarioRole? {
+        didSet {
+            nameLabel.text = identityInfo?.roleName
+            ageLabel.text = String(format: "%.01f / %@",identityInfo?.age ?? 0.0,identityInfo?.nature ?? "")
+            let imageName:String
+            switch identityInfo?.sex {
+            case 0:
+                imageName = "guide_female_icon"
+            case 1:
+                imageName = "guide_male_icon"
+            default:
+                imageName = ""
+            }
+            genderImageView.image = UIImage(named: imageName)
+        }
+    }
+    
     private let backgroundImageView:UIImageView = {
         let imageView = UIImageView(frame: CGRect(origin: CGPointZero, size: CGSize(width: UIScreen.main.bounds.size.width - 84, height: 348)))
         var image = UIImage(named: "guide_identity_card_bg_image")
@@ -22,7 +39,6 @@ class VPIdentityView: UIView {
     private let nameLabel:UILabel = {
         let label = UILabel.init()
         label.textColor = .white
-        label.text = "Jack"
         label.font = UIFont.montserratRegularFont(ofSize: 28)
         return label
     }()

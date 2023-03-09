@@ -1,0 +1,28 @@
+{
+        "code": 200,
+        "msg": null,
+        "localMsg": null,
+        "data": [
+                {
+                        "headImage": "https://vos-img.vipkid-qa.com.cn/prt/fe-static/mastar/thesaurus/1668159798021.jpg.jpeg",
+                        "roleName": "xiaodoubi",
+                        "age": 25.5,
+                        "sex": 3,
+                        "nature": "Very optimistic",
+                        "keyword": "study",
+                        "seasonId": 1001,
+                        "seasonName": "入职第一天",
+                        "recommend": 1,
+                        "tagList": [
+                                {
+                                        "tagId": 123,
+                                        "tagName": "career"
+                                },
+                                {
+                                        "tagId": 1234,
+                                        "tagName": "office"
+                                }
+                        ]
+                }
+        ]
+}

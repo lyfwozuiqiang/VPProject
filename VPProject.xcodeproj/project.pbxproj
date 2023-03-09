@@ -30,6 +30,7 @@
 		01610F6329B877620016D4F5 /* LoginData.json in Resources */ = {isa = PBXBuildFile; fileRef = 01610F6229B877620016D4F5 /* LoginData.json */; };
 		01610F6729B888F00016D4F5 /* GreetingData.json in Resources */ = {isa = PBXBuildFile; fileRef = 01610F6629B888F00016D4F5 /* GreetingData.json */; };
 		01610F6929B8D6180016D4F5 /* VPToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01610F6829B8D6180016D4F5 /* VPToastView.swift */; };
+		01610F6B29B970A20016D4F5 /* IdentityData.json in Resources */ = {isa = PBXBuildFile; fileRef = 01610F6A29B970A20016D4F5 /* IdentityData.json */; };
 		0163A47E29B1E3C8007DB7C4 /* VPRegistOrLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0163A47D29B1E3C8007DB7C4 /* VPRegistOrLoginController.swift */; };
 		0163A48129B33B07007DB7C4 /* VPGuideProcessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0163A48029B33B07007DB7C4 /* VPGuideProcessController.swift */; };
 		0163A48329B46189007DB7C4 /* VPIdentitySelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0163A48229B46189007DB7C4 /* VPIdentitySelectView.swift */; };
@@ -96,6 +97,7 @@
 		01610F6429B882A00016D4F5 /* AlertPopupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPopupManager.swift; sourceTree = "<group>"; };
 		01610F6629B888F00016D4F5 /* GreetingData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GreetingData.json; sourceTree = "<group>"; };
 		01610F6829B8D6180016D4F5 /* VPToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPToastView.swift; sourceTree = "<group>"; };
+		01610F6A29B970A20016D4F5 /* IdentityData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IdentityData.json; sourceTree = "<group>"; };
 		0163A47D29B1E3C8007DB7C4 /* VPRegistOrLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPRegistOrLoginController.swift; sourceTree = "<group>"; };
 		0163A48029B33B07007DB7C4 /* VPGuideProcessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPGuideProcessController.swift; sourceTree = "<group>"; };
 		0163A48229B46189007DB7C4 /* VPIdentitySelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPIdentitySelectView.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				0163A48229B46189007DB7C4 /* VPIdentitySelectView.swift */,
 				0163A48429B46673007DB7C4 /* VPIdentityView.swift */,
 				01610F6629B888F00016D4F5 /* GreetingData.json */,
+				01610F6A29B970A20016D4F5 /* IdentityData.json */,
 			);
 			path = GuideProcess;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 			files = (
 				01C76F19299E2CE9000F3B86 /* LaunchScreen.storyboard in Resources */,
 				01FAB3DE29AF2E0000E70207 /* Montserrat-Medium.otf in Resources */,
+				01610F6B29B970A20016D4F5 /* IdentityData.json in Resources */,
 				01C76F25299F2397000F3B86 /* ListTableViewCell.xib in Resources */,
 				01FAB3DD29AF2E0000E70207 /* RussoOne-Regular.ttf in Resources */,
 				01610F2E29B6EBC30016D4F5 /* background_media.mp4 in Resources */,

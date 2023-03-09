@@ -159,10 +159,10 @@ public struct ScenarioRole: Decodable {
     public let headImage: String?
     public let roleName: String?
     public let age: Double?
-    public let sex: RoleSex?
+    public let sex: Int?
     public let nature: String?      // 性格
     public let keyword: String?     // 关键词
-    public let seasonId: String?
+    public let seasonId: Int?
     public let seasonName: String?
     public let recommend: RecommendType?   // 是否推荐(1:是；0：否)
     public let tagList: [RoleTag]?
@@ -179,5 +179,11 @@ public struct ScenarioRole: Decodable {
         case recommend
         case tagList
     }
-    
+}
+
+public struct IdentityResponse:Decodable {
+    let code:Int?
+    let msg:String?
+    let localMsg:String?
+    let data:[ScenarioRole]?
 }

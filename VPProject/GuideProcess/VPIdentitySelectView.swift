@@ -15,7 +15,7 @@ class VPIdentitySelectView: UIView,UIScrollViewDelegate {
         }
     }
     
-    var dataSource:[String] = [] {
+    var dataSource:[ScenarioRole] = [] {
         didSet {
             for view in identityScrollView.subviews {
                 if view.tag > 0 {
@@ -28,6 +28,7 @@ class VPIdentitySelectView: UIView,UIScrollViewDelegate {
             for (index,item) in dataSource.enumerated() {
                 let identityView = VPIdentityView()
                 identityView.tag = index + 10
+                identityView.identityInfo = item
                 identityScrollView.addSubview(identityView)
                 identityView.snp.makeConstraints { make in
                     if tempItem == nil {
@@ -72,6 +73,7 @@ class VPIdentitySelectView: UIView,UIScrollViewDelegate {
         scrollView.isPagingEnabled = true
         scrollView.clipsToBounds = false
         scrollView.backgroundColor = .clear
+        scrollView.alwaysBounceHorizontal = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         return scrollView

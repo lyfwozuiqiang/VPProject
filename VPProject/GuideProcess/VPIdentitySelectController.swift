@@ -12,15 +12,19 @@ import AVFoundation
 class VPIdentitySelectController: UIViewController {
     
     private var player:AVPlayer?
+    private let identitySelectView:VPIdentitySelectView = VPIdentitySelectView.init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.clipsToBounds = true
         view.backgroundColor = .white
-        
+        // 播放背景视屏
         playBackgroundMedia()
+        // 布局用户界面
         layoutUserInterface()
+        // 获取并处理角色数据
+        dealIdentityRoleResponse()
         NotificationCenter.default.addObserver(self, selector: #selector(playEndNofication), name: .AVPlayerItemDidPlayToEndTime, object: nil)
     }
     
@@ -32,6 +36,35 @@ class VPIdentitySelectController: UIViewController {
     @objc private func playEndNofication() {
         player?.seek(to: CMTime(value: 0, timescale: 1))
         player?.play()
+    }
+    
+    // MARK: —— Network
+    private func getIdentityRoleRequest() async -> IdentityResponse? {
+        guard let fileUrl = Bundle.main.url(forResource: "IdentityData", withExtension: "json") else {
+            return nil
+        }
+        if let jsonData = try? Data(contentsOf: fileUrl) {
+            let response = try? JSONDecoder().decode(IdentityResponse.self, from: jsonData)
+            return response
+        } else {
+            return nil
+        }
+    }
+    
+    private func dealIdentityRoleResponse() {
+        Task {
+            let response = await getIdentityRoleRequest()
+            if response?.data?.count ?? 0 > 0 {
+                identitySelectView.dataSource = response?.data ?? []
+            } else {
+                let alertController = UIAlertController(title: "", message: "Oops! Data is lost. Please try again later.", preferredStyle: .alert)
+                let action = UIAlertAction(title: "Retry", style: .default) { _ in
+                    self.dealIdentityRoleResponse()
+                }
+                alertController.addAction(action)
+                present(alertController, animated: true)
+            }
+        }
     }
     
     // MARK: —— Private method
@@ -59,25 +92,19 @@ class VPIdentitySelectController: UIViewController {
     }
     
     private func layoutUserInterface() {
-        let idSelectView = VPIdentitySelectView.init()
-        idSelectView.personality = "Lựa chọn nhân vật của bạn"
-        idSelectView.dataSource = ["1","1","1","1","1"]
-        idSelectView.backButtonClickHandler = {
+        identitySelectView.backButtonClickHandler = {
             self.navigationController?.popViewController(animated: true)
         }
-        idSelectView.enterButtonClickHandler = { index in
+        identitySelectView.enterButtonClickHandler = { index in
             print("enterButtonClickHandler index = ",index)
         }
-        idSelectView.alpha = 0
-        view.addSubview(idSelectView)
-        idSelectView.snp.makeConstraints { make in
+        identitySelectView.alpha = 0
+        view.addSubview(identitySelectView)
+        identitySelectView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         UIView.animate(withDuration: 0.3) {
-            idSelectView.alpha = 1
+            self.identitySelectView.alpha = 1
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
-            idSelectView.dataSource = ["1","1","1"]
-        })
     }
 }
