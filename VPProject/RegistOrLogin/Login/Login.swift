@@ -10,7 +10,7 @@ import Foundation
 // doc https://ztwgw5unb5.feishu.cn/wiki/wikcnK7JnXIjpYm3x7y9SS5donM
 
 // MARK: 支持母语 model
-public struct LanguageInfo: Decodable {
+public struct LanguageInfo: Codable {
     
     public let langCode: String?     // 语言码
     public let countryFlag: String?   // 国旗
@@ -53,6 +53,13 @@ public struct QuestionItem: Decodable {
         case englishDefinition
     }
     
+}
+
+public struct GreetingResponse:Decodable {
+    let code:Int?
+    let msg:String?
+    let localMsg:String?
+    let data:[QuestionItem]?
 }
 
 public struct Question: Decodable {
@@ -116,7 +123,13 @@ public struct SigninResponse: Decodable {
         case registNextStep
         case token
     }
-    
+}
+
+public struct LoginResponse: Decodable {
+    let code:Int?
+    let msg:String?
+    let localMsg:String?
+    let data:SigninResponse?
 }
 
 public enum RoleSex: Int, Codable {

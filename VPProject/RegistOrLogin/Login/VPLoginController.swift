@@ -111,14 +111,32 @@ class VPLoginController: UIViewController,UITextFieldDelegate {
         }
     }
     
+    // MARK: —— Network
+    private func loginRequest() {
+        let bundleFileUrl = Bundle.main.url(forResource: "LoginData", withExtension: "json")
+        guard let fileUrl = bundleFileUrl else {
+            return
+        }
+        if let jsonData = try? Data(contentsOf: fileUrl) {
+            let loginResponse = try? JSONDecoder().decode(LoginResponse.self, from: jsonData)
+            print("loginResponse = ",loginResponse as Any)
+            VPToastView.show(message: "Login success", in: view,iconName: "login_net_error_icon")
+        }
+        enableLoginButton(enable: isAccountAndPasswordLegal())
+    }
+    
     // MARK: —— Notification
     @objc func textFieldEditingChanged(notification:Notification) {
+        if isSendLoginVerification {
+            return
+        }
+        
         guard let textField:UITextField = notification.object as? UITextField else {
             return
         }
         // 如果没有高亮输入状态文字再确认 loginButton 状态
         if textField.markedTextRange == nil {
-            enableLoginButton(enable: isAccountOrPasswordLegal())
+            enableLoginButton(enable: isAccountAndPasswordLegal())
         }
     }
     
@@ -158,6 +176,13 @@ class VPLoginController: UIViewController,UITextFieldDelegate {
         }
     }
     
+    @objc private func loginButtonClick() {
+        view.endEditing(true)
+        isSendLoginVerification = true
+        enableLoginButton(enable: false)
+        loginRequest()
+    }
+    
     // MARK: —— UITextFieldDelegate
     // 如果账号TextField处于第一响应者 则边框加粗变色
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -187,7 +212,7 @@ class VPLoginController: UIViewController,UITextFieldDelegate {
         if textField == accountTextField  {
             passwordTextField.becomeFirstResponder()
         } else if textField == passwordTextField {
-            if isAccountOrPasswordLegal() {
+            if isAccountAndPasswordLegal() {
                 textField.endEditing(true)
                 isSendLoginVerification = true
                 enableLoginButton(enable: false)
@@ -339,6 +364,7 @@ class VPLoginController: UIViewController,UITextFieldDelegate {
         
         // 添加登录按钮
         view.addSubview(loginButton)
+        loginButton.addTarget(self, action: #selector(loginButtonClick), for: .touchUpInside)
         loginButton.snp.makeConstraints { make in
             make.size.equalTo(76)
             make.top.equalTo(centerView.snp.bottom).offset(32)
@@ -354,7 +380,7 @@ class VPLoginController: UIViewController,UITextFieldDelegate {
     }
     
     // 账号及密码是否合法
-    private func isAccountOrPasswordLegal() -> Bool {
+    private func isAccountAndPasswordLegal() -> Bool {
         return accountTextField.text?.count ?? 0 > 5 && passwordTextField.text?.count ?? 0 > 5
     }
     

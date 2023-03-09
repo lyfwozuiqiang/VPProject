@@ -1,0 +1,14 @@
+{
+    "code": 200,
+    "msg": null,
+    "localMsg": null,
+    "data": {
+        "userId": "study",
+        "motherTongue": "vi-vn",
+        "deviceId": "adaf-ereafaf-525rwfafaf",
+        "registerLevel":"2",
+        "registerPurpose":"study",
+        "registNextStep":"SUCCESS",
+        "token":"adfsafsafsdfdsfsdaf"
+    }
+}

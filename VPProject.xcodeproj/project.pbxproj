@@ -27,6 +27,9 @@
 		01610F5D29B82FFC0016D4F5 /* VPLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01610F5929B82FFC0016D4F5 /* VPLoginController.swift */; };
 		01610F5F29B8303F0016D4F5 /* VPRegistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01610F5E29B8303F0016D4F5 /* VPRegistController.swift */; };
 		01610F6129B868A20016D4F5 /* LanguageSelectData.json in Resources */ = {isa = PBXBuildFile; fileRef = 01610F6029B868A20016D4F5 /* LanguageSelectData.json */; };
+		01610F6329B877620016D4F5 /* LoginData.json in Resources */ = {isa = PBXBuildFile; fileRef = 01610F6229B877620016D4F5 /* LoginData.json */; };
+		01610F6729B888F00016D4F5 /* GreetingData.json in Resources */ = {isa = PBXBuildFile; fileRef = 01610F6629B888F00016D4F5 /* GreetingData.json */; };
+		01610F6929B8D6180016D4F5 /* VPToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01610F6829B8D6180016D4F5 /* VPToastView.swift */; };
 		0163A47E29B1E3C8007DB7C4 /* VPRegistOrLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0163A47D29B1E3C8007DB7C4 /* VPRegistOrLoginController.swift */; };
 		0163A48129B33B07007DB7C4 /* VPGuideProcessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0163A48029B33B07007DB7C4 /* VPGuideProcessController.swift */; };
 		0163A48329B46189007DB7C4 /* VPIdentitySelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0163A48229B46189007DB7C4 /* VPIdentitySelectView.swift */; };
@@ -89,6 +92,10 @@
 		01610F5929B82FFC0016D4F5 /* VPLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPLoginController.swift; sourceTree = "<group>"; };
 		01610F5E29B8303F0016D4F5 /* VPRegistController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPRegistController.swift; sourceTree = "<group>"; };
 		01610F6029B868A20016D4F5 /* LanguageSelectData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LanguageSelectData.json; sourceTree = "<group>"; };
+		01610F6229B877620016D4F5 /* LoginData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoginData.json; sourceTree = "<group>"; };
+		01610F6429B882A00016D4F5 /* AlertPopupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPopupManager.swift; sourceTree = "<group>"; };
+		01610F6629B888F00016D4F5 /* GreetingData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GreetingData.json; sourceTree = "<group>"; };
+		01610F6829B8D6180016D4F5 /* VPToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPToastView.swift; sourceTree = "<group>"; };
 		0163A47D29B1E3C8007DB7C4 /* VPRegistOrLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPRegistOrLoginController.swift; sourceTree = "<group>"; };
 		0163A48029B33B07007DB7C4 /* VPGuideProcessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPGuideProcessController.swift; sourceTree = "<group>"; };
 		0163A48229B46189007DB7C4 /* VPIdentitySelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPIdentitySelectView.swift; sourceTree = "<group>"; };
@@ -201,6 +208,7 @@
 			children = (
 				01610F5829B82FFC0016D4F5 /* Login.swift */,
 				01610F5929B82FFC0016D4F5 /* VPLoginController.swift */,
+				01610F6229B877620016D4F5 /* LoginData.json */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -223,6 +231,7 @@
 				01610F5129B7878E0016D4F5 /* VPIdentitySelectController.swift */,
 				0163A48229B46189007DB7C4 /* VPIdentitySelectView.swift */,
 				0163A48429B46673007DB7C4 /* VPIdentityView.swift */,
+				01610F6629B888F00016D4F5 /* GreetingData.json */,
 			);
 			path = GuideProcess;
 			sourceTree = "<group>";
@@ -283,6 +292,8 @@
 				011570C329A3495400B94616 /* UIFont+Extension.swift */,
 				0163A48829B5E4CD007DB7C4 /* UICommonButton.swift */,
 				0163A48929B5E4CD007DB7C4 /* UIView+Extension.swift */,
+				01610F6429B882A00016D4F5 /* AlertPopupManager.swift */,
+				01610F6829B8D6180016D4F5 /* VPToastView.swift */,
 				0163A47F29B33AC0007DB7C4 /* GuideProcess */,
 				0163A47C29B1E324007DB7C4 /* RegistOrLogin */,
 				01FAB3CF29ADC6F500E70207 /* FollowReadingResult */,
@@ -444,8 +455,10 @@
 				01FAB3D529ADC77800E70207 /* VPFollowReadingController.xib in Resources */,
 				01C76F16299E2CE9000F3B86 /* Assets.xcassets in Resources */,
 				0107DF0529B08A53005138E4 /* Montserrat-SemiBoldItalic.ttf in Resources */,
+				01610F6729B888F00016D4F5 /* GreetingData.json in Resources */,
 				01C76F14299E2CE9000F3B86 /* Main.storyboard in Resources */,
 				01FAB3DC29AF2E0000E70207 /* Montserrat-Bold.otf in Resources */,
+				01610F6329B877620016D4F5 /* LoginData.json in Resources */,
 				01FAB3DF29AF2E0000E70207 /* Montserrat-Regular.otf in Resources */,
 				01FAB3E029AF2E0000E70207 /* Montserrat-SemiBold.otf in Resources */,
 				01610F6129B868A20016D4F5 /* LanguageSelectData.json in Resources */,
@@ -538,6 +551,7 @@
 				01C76F24299F2397000F3B86 /* ListTableViewCell.swift in Sources */,
 				011570B729A2254600B94616 /* VPDialogueLeftCell.swift in Sources */,
 				011570BE29A2295F00B94616 /* VPGradientView.swift in Sources */,
+				01610F6929B8D6180016D4F5 /* VPToastView.swift in Sources */,
 				01AB78EF29A4E44900E311E8 /* VPFinishedController.swift in Sources */,
 				011570BD29A2295F00B94616 /* VPBorderView.swift in Sources */,
 				011570C429A3495400B94616 /* UIFont+Extension.swift in Sources */,

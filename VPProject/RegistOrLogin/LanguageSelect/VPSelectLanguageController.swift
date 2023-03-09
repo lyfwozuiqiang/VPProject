@@ -27,17 +27,20 @@ class VPSelectLanguageController: UIViewController,UITableViewDataSource,UITable
         // 布局用户页面
         layoutUserInterface()
         // 获取并处理语言选项
-        getLanguagesData()
+        dealLanguagesData()
+    }
+    
+    deinit {
+        print("VPSelectLanguageController deinit")
     }
     
     // MARK: —— Network
-    private func getLanguageResponse() async -> LangeuageResponse? {
-        let bundleFilePath = Bundle.main.path(forResource: "LanguageSelectData", ofType: "json")
-        guard let filePath = bundleFilePath else {
+    private func getLanguageRequest() async -> LangeuageResponse? {
+        let bundleFileUrl = Bundle.main.url(forResource: "LanguageSelectData", withExtension: "json")
+        guard let fileUrl = bundleFileUrl else {
             return nil
         }
-        let fileUrl = NSURL(fileURLWithPath: filePath)
-        if let jsonData = try? Data(contentsOf: fileUrl as URL) {
+        if let jsonData = try? Data(contentsOf: fileUrl) {
             let languageInfo = try? JSONDecoder().decode(LangeuageResponse.self, from: jsonData)
             return languageInfo
         } else {
@@ -45,16 +48,27 @@ class VPSelectLanguageController: UIViewController,UITableViewDataSource,UITable
         }
     }
     
-    private func getLanguagesData() {
+    private func dealLanguagesData() {
         Task {
-            let response = await getLanguageResponse()
+            let response = await getLanguageRequest()
             languageArray = response?.data ?? []
             if languageArray.count > 0 {
                 var firstLanguageInfo = languageArray.first
                 firstLanguageInfo?.isSelected = true
                 languageArray[0] = firstLanguageInfo!
+                languageTableView.reloadData()
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                    if self.view.window != nil {
+                        let alertController = UIAlertController(title: "", message: "Oops! Data is lost. Please try again later.", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "Retry", style: .default) { _ in
+                            self.dealLanguagesData()
+                        }
+                        alertController.addAction(action)
+                        self.present(alertController, animated: true)
+                    }
+                })
             }
-            languageTableView.reloadData()
         }
     }
     

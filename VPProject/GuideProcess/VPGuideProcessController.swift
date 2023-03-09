@@ -97,9 +97,12 @@ class VPGuideProcessController: UIViewController {
     private var currentMessage:String = ""
     private var step:Int = 0
     
+    // 是否执行完了睁眼动画
+    private var isFinishedAnimate:Bool = false
     private var player:AVPlayer?
-    
     private var tapGesture:UITapGestureRecognizer?
+    
+    private var response:GreetingResponse?
     
     // MARK: —— Life cycle
     override func viewDidLoad() {
@@ -110,11 +113,14 @@ class VPGuideProcessController: UIViewController {
         view.addGestureRecognizer(tapGesture!)
         // 播放背景视频
         playBackgroundMedia()
-        NotificationCenter.default.addObserver(self, selector: #selector(playEndNofication), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+        // 获取并处理欢迎语
+        dealGreetingWords()
         // 布局用户页面
         layoutUserInterface()
         // 第一次睁眼动画
         firstOpenAnimation()
+        // 监听文本输入
+        NotificationCenter.default.addObserver(self, selector: #selector(playEndNofication), name: .AVPlayerItemDidPlayToEndTime, object: nil)
     }
     
     // MARK: —— Notification
@@ -132,17 +138,12 @@ class VPGuideProcessController: UIViewController {
         tapGesture?.isEnabled = false
         titleLabel.text = titleString
         messageLabel.text = messageString
-        if step == 0 {
-            step2Setting()
+        if step < response?.data?.count ?? 0 {
+            nextStepSetting()
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { [self] in
                 tapGesture?.isEnabled = true
             })
-        } else if step == 1 {
-            step3Setting()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { [self] in
-                tapGesture?.isEnabled = true
-            })
-        } else if step == 2 {
+        } else if step > 0 && step == response?.data?.count ?? 0 {
             addNextButton()
         }
     }
@@ -159,15 +160,11 @@ class VPGuideProcessController: UIViewController {
             currentMessage = String(messageString.prefix(index))
             messageLabel.text = currentMessage
             if currentMessage.count == messageString.count {
-                if step == 0 {
-                    step2Setting()
-                } else if step == 1 {
-                    step3Setting()
-                }
-                return
+                nextStepSetting()
             }
         }
-        if step == 2 && currentMessage.count == messageString.count {
+
+        if step == response?.data?.count ?? 0 && step > 0 && currentMessage.count == messageString.count {
             addNextButton()
         }
     }
@@ -175,6 +172,50 @@ class VPGuideProcessController: UIViewController {
     @objc private func nextButtonClick() {
         let selectVc = VPIdentitySelectController.init()
         navigationController?.pushViewController(selectVc, animated: true)
+    }
+    
+    // MARK: —— Network
+    private func getGreetingWordsRequest() async -> GreetingResponse? {
+        guard let fileUrl = Bundle.main.url(forResource: "GreetingData", withExtension: "json") else {
+            return nil
+        }
+        if let jsonData = try? Data(contentsOf: fileUrl) {
+            let response = try? JSONDecoder().decode(GreetingResponse.self, from: jsonData)
+            return response
+        } else {
+            return nil
+        }
+    }
+    
+    private func dealGreetingWords() {
+        Task {
+            let response = await getGreetingWordsRequest()
+            if response?.data?.count ?? 0 > 0 {
+                self.response = response
+                @MainActor func loopAnimateFinished() {
+                    if isFinishedAnimate {
+                        addDisplayLink()
+                        titleString = response!.data?[0].targetDefinition ?? ""
+                        messageString = response?.data?[0].englishDefinition ?? ""
+                        addGuideMessageBgImageViewAndIndicatorImageView()
+                        step = 1
+                        return
+                    } else {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                            loopAnimateFinished()
+                        })
+                    }
+                }
+                loopAnimateFinished()
+            } else {
+                let alertController = UIAlertController(title: "", message: "Oops! Data is lost. Please try again later.", preferredStyle: .alert)
+                let action = UIAlertAction(title: "Retry", style: .default) { _ in
+                    self.dealGreetingWords()
+                }
+                alertController.addAction(action)
+                present(alertController, animated: true)
+            }
+        }
     }
     
     // MARK: —— Private method
@@ -214,29 +255,18 @@ class VPGuideProcessController: UIViewController {
         bottomShapeLayer.path = bottomLayerFromPath.cgPath
     }
     
-    private func step2Setting() {
+    private func nextStepSetting() {
         displayLink?.isPaused = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { [self] in
-            step = 1
-            currentTitle = ""
-            titleString =  "Here, you'll learn English immersively, and I will be with you."
-            messageLabel.text = ""
-            currentMessage = ""
-            messageString = "Tại đây, bạn có thể vừa học tiếng Anh vừa trải nghiệm một hành trình hoàn toàn mới trong cuộc đời."
-            displayLink?.isPaused = false
-        })
-    }
-    
-    private func step3Setting() {
-        displayLink?.isPaused = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { [self] in
-            step = 2
-            currentTitle = ""
-            titleString =  "Now, choose a role and begin a new life."
-            messageLabel.text = ""
-            currentMessage = ""
-            messageString = "Bây giờ, hãy chọn một nhân vật và thay đổi cuộc sống của anh / cô thông qua sự lựa chọn của bạn."
-            displayLink?.isPaused = false
+            if step < response?.data?.count ?? 0 {
+                currentTitle = ""
+                titleString =  response?.data?[step].targetDefinition ?? ""
+                messageLabel.text = ""
+                currentMessage = ""
+                messageString = response?.data?[step].englishDefinition ?? ""
+                displayLink?.isPaused = false
+                step += 1
+            }
         })
     }
     
@@ -260,7 +290,6 @@ class VPGuideProcessController: UIViewController {
             visualEffectView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }
-            
         }
     }
     
@@ -353,7 +382,7 @@ class VPGuideProcessController: UIViewController {
         bottomShapeLayer.add(bottomGroupAnimation, forKey: nil)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5, execute: {
-            self.addGuideMessageBgImageViewAndIndicatorImageView()
+            self.isFinishedAnimate = true
         })
     }
     
@@ -432,14 +461,6 @@ class VPGuideProcessController: UIViewController {
         UIView.animate(withDuration: 0.5) {
             self.titleLabel.alpha = 1
             self.messageLabel.alpha = 1
-        } completion: { [self] _ in
-            self.displayLink = CADisplayLink(target: self, selector: #selector(displayLinkAcion))
-            if #available(iOS 15.0, *) {
-                self.displayLink?.preferredFrameRateRange = CAFrameRateRange(minimum: 60, maximum: 60)
-            } else {
-                self.displayLink?.preferredFramesPerSecond = 60
-            }
-            self.displayLink?.add(to: .current, forMode: .common)
         }
     }
     
@@ -523,5 +544,15 @@ class VPGuideProcessController: UIViewController {
             lineView.removeFromSuperview()
             bottomWakeLabel.removeFromSuperview()
         })
+    }
+    
+    private func addDisplayLink() {
+        self.displayLink = CADisplayLink(target: self, selector: #selector(displayLinkAcion))
+        if #available(iOS 15.0, *) {
+            self.displayLink?.preferredFrameRateRange = CAFrameRateRange(minimum: 60, maximum: 60)
+        } else {
+            self.displayLink?.preferredFramesPerSecond = 60
+        }
+        self.displayLink?.add(to: .current, forMode: .common)
     }
 }

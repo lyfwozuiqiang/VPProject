@@ -1,0 +1,16 @@
+
+{
+    "code": 200,
+    "msg": null,
+    "localMsg": null,
+    "data": [
+        {
+            "targetDefinition": "太好了，你醒了",
+            "englishDefinition": "Wow! You're awake"
+        },
+        {
+            "targetDefinition": "欢迎顺利登录平行宇宙",
+            "englishDefinition": "Welecome We have landed in the parallel universe master"
+        }
+    ]
+}
