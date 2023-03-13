@@ -34,44 +34,6 @@ class VPSelectLanguageController: UIViewController,UITableViewDataSource,UITable
         print("VPSelectLanguageController deinit")
     }
     
-    // MARK: —— Network
-    private func getLanguageRequest() async -> LangeuageResponse? {
-        let bundleFileUrl = Bundle.main.url(forResource: "LanguageSelectData", withExtension: "json")
-        guard let fileUrl = bundleFileUrl else {
-            return nil
-        }
-        if let jsonData = try? Data(contentsOf: fileUrl) {
-            let languageInfo = try? JSONDecoder().decode(LangeuageResponse.self, from: jsonData)
-            return languageInfo
-        } else {
-            return nil
-        }
-    }
-    
-    private func dealLanguagesData() {
-        Task {
-            let response = await getLanguageRequest()
-            languageArray = response?.data ?? []
-            if languageArray.count > 0 {
-                var firstLanguageInfo = languageArray.first
-                firstLanguageInfo?.isSelected = true
-                languageArray[0] = firstLanguageInfo!
-                languageTableView.reloadData()
-            } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                    if self.view.window != nil {
-                        let alertController = UIAlertController(title: "", message: "Oops! Data is lost. Please try again later.", preferredStyle: .alert)
-                        let action = UIAlertAction(title: "Retry", style: .default) { _ in
-                            self.dealLanguagesData()
-                        }
-                        alertController.addAction(action)
-                        self.present(alertController, animated: true)
-                    }
-                })
-            }
-        }
-    }
-    
     // MARK: —— Action
     // 返回按钮点击事件
     @objc private func backButtonClick() {
@@ -111,6 +73,44 @@ class VPSelectLanguageController: UIViewController,UITableViewDataSource,UITable
             languageArray[index] = model
         }
         tableView.reloadData()
+    }
+    
+    // MARK: —— Network
+    private func getLanguageRequest() async -> LangeuageResponse? {
+        let bundleFileUrl = Bundle.main.url(forResource: "LanguageSelectData", withExtension: "json")
+        guard let fileUrl = bundleFileUrl else {
+            return nil
+        }
+        if let jsonData = try? Data(contentsOf: fileUrl) {
+            let languageInfo = try? JSONDecoder().decode(LangeuageResponse.self, from: jsonData)
+            return languageInfo
+        } else {
+            return nil
+        }
+    }
+    
+    private func dealLanguagesData() {
+        Task {
+            let response = await getLanguageRequest()
+            languageArray = response?.data ?? []
+            if languageArray.count > 0 {
+                var firstLanguageInfo = languageArray.first
+                firstLanguageInfo?.isSelected = true
+                languageArray[0] = firstLanguageInfo!
+                languageTableView.reloadData()
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                    if self.view.window != nil {
+                        let alertController = UIAlertController(title: "", message: "Oops! Data is lost. Please try again later.", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "Retry", style: .default) { _ in
+                            self.dealLanguagesData()
+                        }
+                        alertController.addAction(action)
+                        self.present(alertController, animated: true)
+                    }
+                })
+            }
+        }
     }
     
     // MARK: —— Private method

@@ -13,6 +13,7 @@ class VPIdentityView: UIView {
         didSet {
             nameLabel.text = identityInfo?.roleName
             ageLabel.text = String(format: "%.01f / %@",identityInfo?.age ?? 0.0,identityInfo?.nature ?? "")
+            themeDesLabel.text = identityInfo?.seasonName
             let imageName:String
             switch identityInfo?.sex {
             case 0:

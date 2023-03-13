@@ -41,18 +41,23 @@ public enum QuestionType: String, Codable {
 }
 
 // conversionInfo 与 questionnaire 共用
-public struct QuestionItem: Decodable {
-    
-    public let qosCode: String?
-    public let targetDefinition: String?
-    public let englishDefinition: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case qosCode
-        case targetDefinition
-        case englishDefinition
-    }
-    
+public struct QuestionItem: Decodable,Equatable {
+  
+  public let qosCode: String?
+  public let targetDefinition: String?
+  public let englishDefinition: String?
+  // 是否是选中状态
+  public var isSelected:Bool = false
+  
+  enum CodingKeys: String, CodingKey {
+    case qosCode
+    case targetDefinition
+    case englishDefinition
+  }
+  
+  public static func == (lhs: QuestionItem, rhs: QuestionItem) -> Bool {
+    return lhs.targetDefinition == rhs.targetDefinition
+  }
 }
 
 public struct GreetingResponse:Decodable {
@@ -64,16 +69,25 @@ public struct GreetingResponse:Decodable {
 
 public struct Question: Decodable {
     
-    public let type: QuestionType?
+    public let type: String?
     public let targetDefinition: String?
-    public let items: [QuestionItem]?
-    
+    public var items: [QuestionItem]?
+    public var isShowFinished:Bool = false
+  // 选项是否处于全部展示状态
+  public var isExpand:Bool = true
+  
     enum CodingKeys: String, CodingKey {
         case type
         case targetDefinition   
         case items
     }
-    
+}
+
+public struct QuestionResponse: Decodable {
+    let code:Int?
+    let msg:String?
+    let localMsg:String?
+    var data:[Question]?
 }
 
 // MARK: 注册 model

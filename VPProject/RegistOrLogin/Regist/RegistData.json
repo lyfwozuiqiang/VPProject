@@ -1,0 +1,89 @@
+{
+  "code":200,
+  "msg":null,
+  "localMsg":null,
+  "data":[
+    {
+      "type":"CONVERSION",
+      "items":[
+        {
+          "targetDefinition":"提升学习考试成绩",
+          "englishDefinition":"Improve the performance of study and examination"
+        },
+        {
+          "targetDefinition":"更好的工作机会",
+          "englishDefinition":"Better job opportunities"
+        },
+        {
+          "targetDefinition":"出国旅游生活",
+          "englishDefinition":"Travel abroad"
+        },
+        {
+          "targetDefinition":"兴趣爱好",
+          "englishDefinition":"hobby"
+        },
+        {
+          "targetDefinition":"日常生活沟通",
+          "englishDefinition":"Communication in daily life"
+        }
+      ]
+    },
+    {
+      "type":"PURPOSE",
+      "targetDefinition":"你学习英语的目的是什么",
+      "items":[
+        {
+          "qosCode":"study",
+          "targetDefinition":"提升学习考试成绩",
+          "englishDefinition":"Improve the performance of study and examination"
+        },
+        {
+          "qosCode":"work",
+          "targetDefinition":"更好的工作机会",
+          "englishDefinition":"Better job opportunities"
+        },
+        {
+          "qosCode":"travel",
+          "targetDefinition":"出国旅游生活",
+          "englishDefinition":"Travel abroad"
+        },
+        {
+          "qosCode":"hobby",
+          "targetDefinition":"兴趣爱好",
+          "englishDefinition":"hobby"
+        },
+        {
+          "qosCode":"daily",
+          "targetDefinition":"日常生活沟通",
+          "englishDefinition":"Communication in daily life"
+        }
+      ]
+    },
+    {
+      "type":"LEVEL",
+      "targetDefinition":"你当前的英语水平如何",
+      "items":[
+        {
+          "qosCode":"1",
+          "targetDefinition":"零基础",
+          "englishDefinition":"Zero basis"
+        },
+        {
+          "qosCode":"2",
+          "targetDefinition":"认识简单的单词",
+          "englishDefinition":"Recognize simple words"
+        },
+        {
+          "qosCode":"3",
+          "targetDefinition":"可以进行简单对话",
+          "englishDefinition":"Can have a simple conversation"
+        },
+        {
+          "qosCode":"4",
+          "targetDefinition":"能流利进行日常沟通",
+          "englishDefinition":"Fluent in daily communication"
+        }
+      ]
+    }
+  ]
+}
